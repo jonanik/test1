@@ -65,7 +65,7 @@ $(document).ready(function() {
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
                 document.getElementById('postcode').value = data.zonecode;
                 document.getElementById("roadAddress").value = roadAddr;
-                document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
+                document.getElementById("roadAddress").value = data.jibunAddress;
                 
                 // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
                 if(roadAddr !== ''){
@@ -340,8 +340,8 @@ $(document).ready(function() {
 									<li>* 표시된 항목은 필수 항목이므로 반드시 입력하셔야 회원가입이 진행됩니다.</li>
 								</ul>
 							</div>
+							<form action="joinOk" name="joinForm" enctype="enctype multipart/form-data">
 
-							<form action="joinOk" name="joinForm">
 								<div class="memberbd">
 									<table
 										summary="이름, 아이디, 비밀번호, 비밀번호 확인, 이메일, 이메일수신여부, 주소, 휴대폰, 유선전화, 생년월일 순으로 회원가입 정보를 등록할수 있습니다."
@@ -399,23 +399,16 @@ $(document).ready(function() {
 														<li><span class="valign">&nbsp;@&nbsp;</span></li>
 														<li class="r10"><input type="text" name="email2"
 															id="emailList0" class="w134" /></li>
-														<li><select id="emailList" name="emailSelect" onchange="selectChange()">
-																<option value="1" selected="selected">직접입력</option>
+														<li><select id="emailList" name="emailSelect" onchange="document.joinForm.email2.focus();
+                              							document.joinForm.email2.value =document.joinForm.emailList[document.joinForm.emailList.selectedIndex].value;
+                            							" id="emailOne">
+																<option value="">직접입력</option>
 																<option value="naver.com">naver.com</option>
 																<option value="daum.net">daum.net</option>
 																<option value="hanmail.net">hanmail.net</option>
-																<option value="nate.com">nate.com</option>
-																<option value="yahoo.co.kr">yahoo.co.kr</option>
-																<option value="paran.com">paran.com</option>
-																<option value="empal.com">empal.com</option>
-																<option value="hotmail.com">hotmail.com</option>
-																<option value="korea.com">korea.com</option>
-																<option value="lycos.co.kr">lycos.co.kr</option>
-																<option value="dreamwiz.com">dreamwiz.com</option>
-																<option value="hanafos.com">hanafos.com</option>
-																<option value="chol.com">chol.com</option>
+																<option value="nate.com">nate.com</option>														
 																<option value="gmail.com">gmail.com</option>
-																<option value="empas.com">empas.com</option>
+																
 														</select>&nbsp;&nbsp;&nbsp;</li>
 													</ul> 
 													<script type="text/javascript"> 
@@ -440,10 +433,10 @@ $(document).ready(function() {
 												<td>
 													<p>쟈뎅에서 진행되는 이벤트와 쇼핑에 대한 정보를 이메일로 받아보시겠습니까?</p>
 													<ul class="question">
-														<li><input type="radio" name="receive" value="yes"
+														<li><input type="radio" name="emailReceive" value="yes"
 															id="receive_yes" class="radio_t" checked="checked" /><label
 															for="receive_yes">예</label></li>
-														<li><input type="radio" name="receive" value="no"
+														<li><input type="radio" name="emailReceive" value="no"
 															id="receive_no" class="radio_t" /><label for="receive_no">아니오</label>
 														</li>
 													</ul>
@@ -456,11 +449,11 @@ $(document).ready(function() {
 												<th scope="row"><span>주소 *</span></th>
 												<td>
 													<ul class="pta">
-														<li><input type="text" id="postcode" class="w134" />&nbsp;</li>
+														<li><input type="text" name="address1" id="postcode" class="w134" />&nbsp;</li>
 														<li><button class="addressBtn" type="button" onclick="sample4_execDaumPostcode()"><span>우편번호
 																	찾기</span></button></li>
 														<li class="pt5"><input type="text"
-															class="addressType" id="roadAddress" /></li>
+															class="addressType" name="address2" id="roadAddress" /></li>
 														<li class="cb"><span class="mvalign">※ 상품 배송 시
 																받으실 주소입니다. 주소를 정확히 적어 주세요.</span></li>
 													</ul>
@@ -488,10 +481,10 @@ $(document).ready(function() {
 																서비스를 받아보시겠습니까?</span></li>
 														<li class="pt5">
 															<ul class="baseQues">
-																<li><input type="radio" name="sms" value="yes"
+																<li><input type="radio" name="smsReceive" value="yes"
 																	id="sms_yes" class="radio_t" checked="checked" /><label
 																	for="sms_yes">예</label></li>
-																<li><input type="radio" name="sms" value="no"
+																<li><input type="radio" name="smsReceive" value="no"
 																	id="sms_no" class="radio_t" /><label for="sms_no">아니오</label>
 																</li>
 															</ul>
@@ -509,7 +502,7 @@ $(document).ready(function() {
 																<script type="text/javascript">
 													//<![CDATA[
 														for(var i=1940; i<=2014; i++){
-															document.write("<option value=''>" + i + "년"+ "</option>");	
+															document.write("<option value='"+i+"'>" + i + "년"+ "</option>");	
 														};
 													//]]>
 													</script>
@@ -522,9 +515,9 @@ $(document).ready(function() {
 													//<![CDATA[
 														for(var i=1; i<=12; i++){
 															if(i<10){
-																document.write("<option value=''>0" + i + "월"+"</option>");
+																document.write("<option value='"+i+"'>" + i + "월"+"</option>");
 															}else{
-																document.write("<option value=''>" + i + "월"+ "</option>");
+																document.write("<option value='"+i+"'>" + i + "월"+ "</option>");
 															};
 														};
 													//]]>
@@ -532,15 +525,15 @@ $(document).ready(function() {
 														</select></li>
 														<li>&nbsp;<span class="valign">월</span>&nbsp;&nbsp;&nbsp;
 														</li>
-														<li><select id="day">
+														<li><select name="day" id="day">
 																<option value='' selected="selected">선택하세요</option>
 																<script type="text/javascript">
 													//<![CDATA[
 														for(var i=1; i<=31; i++){
 															if(i<10){
-																document.write("<option value=''>0" + i + "일"+"</option>");
+																document.write("<option value='"+i+"'>" + i + "일"+"</option>");
 															}else{
-																document.write("<option value=''>" + i + "일"+ "</option>");
+																document.write("<option value='"+i+"'>" + i + "일"+ "</option>");
 															};
 														};
 													//]]>
@@ -549,10 +542,10 @@ $(document).ready(function() {
 														<li class="r20">&nbsp;<span class="valign">일</span></li>
 														<li class="pt5">
 															<ul class="baseQues">
-																<li><input type="radio" name="birth" value="양력"
+																<li><input type="radio" name="solarLunar" value="양력"
 																	id="solar" class="radio_t" checked="checked" /><label
 																	for="solar">양력</label></li>
-																<li><input type="radio" name="birth" value="음력"
+																<li><input type="radio" name="solarLunar" value="음력"
 																	id="lunar" class="radio_t" /><label for="lunar">음력</label>
 																</li>
 															</ul>
@@ -579,11 +572,11 @@ $(document).ready(function() {
 															<div class="businessTy">
 																<div>
 																	<label for="">사업자번호</label> <input class="w134"
-																		name="bussinessNum" type="text">
+																		name="bussinessNum" value="" type="text">
 																</div>
 																<div>
 																	<label for="">사업자등록증</label> <input class="fileType"
-																		name="bussinessImage" type="file">
+																		name="bussinessImage" value="" type="file">
 																</div>
 															</div> <li>
 										
@@ -595,7 +588,7 @@ $(document).ready(function() {
 						</div>
 						
 
-					
+					</form>
 						</div>
 
 					
@@ -609,7 +602,7 @@ $(document).ready(function() {
 							</ul>
 						</div>
 					</div>
-					</form>
+				
 					<!-- //Btn Area -->
 
 

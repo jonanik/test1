@@ -31,9 +31,6 @@ $(document).ready(function() {
 
 });
 </script>
-
-
-</script>
 </head>
 <body>
 
@@ -193,84 +190,172 @@ $(document).ready(function() {
 		<div id="location">
 			<ol>
 				<li><a href="#">HOME</a></li>
-				<li><a href="#">MEMBERSHIP</a></li>
-				<li class="last">회원가입</li>
+				<li><a href="#">EVENT</a></li>
+				<li class="last">진행중 이벤트</li>
 			</ol>
 		</div>
 		
 		<div id="outbox">		
 			<div id="left">
-				<div id="title2">MEMBERSHIP<span>멤버쉽</span></div>
+				<div id="title2">EVENT<span>이벤트</span></div>
 				<ul>	
-					<li><a href="#" id="leftNavi1">로그인</a></li>
-					<li><a href="#" id="leftNavi2">회원가입</a></li>
-					<li><a href="#" id="leftNavi3">아이디/<span>비밀번호 찾기</span></a></li>
-					<li><a href="#" id="leftNavi4">회원약관</a></li>
-					<li><a href="#" id="leftNavi5">개인정보<span>취급방침</span></a></li>
-					<li class="last"><a href="#" id="leftNavi6">이메일무단<span>수집거부</span></a></li>
+					<li><a href="#" id="leftNavi1">진행중 이벤트</a></li>
+					<li><a href="#" id="leftNavi2">종료된 이벤트</a></li>
+					<li class="last"><a href="#" id="leftNavi3">당첨자 발표</a></li>
 				</ul>			
-			</div><script type="text/javascript">initSubmenu(2,0);</script>
+			</div><script type="text/javascript">initSubmenu(1,0);</script>
 
 
 			<!-- contents -->
 			<div id="contents">
-				<div id="member">
-					<h2><strong>회원가입</strong><span>회원으로 가입하시면 보다 더 다양한 혜택을 누리실 수 있습니다.</span></h2>
+				<div id="mypage">
+					<h2><strong>진행중 이벤트</strong><span>쟈뎅샵의 특별한 혜택이 가득한 이벤트에 참여해 보세요.</span></h2>
 					
-					<!-- STEP -->
-					<div class="stepWrap">
-						<div class="step">
-							<p class="web">STEP 01</p>
-							<p class="txt">실명확인</p>							
-						</div>
+					<!-- list -->
+					<div class="eventList">
+						<ul>
+							<!-- 반복 -->
+							<li>
+								<div class="img">
+									<a href="eventView"><img src="images/img/sample_event.jpg" alt="진행중 이벤트" /></a>
+								</div>
+								<div class="txt">
+									<div class="subject">까페모리 봄바람 커피한잔 30% 할인 이벤트!!까페모리 봄바람 커피한잔 30% 할인 이벤트!!</div>
+									<div class="day">이벤트 기간 : 2014-04-01 ~ 2014-04-29</div>
+								</div>
+							</li>
+							<!-- //반복 -->
 
-						<div class="step">
-							<p class="web">STEP 02</p>
-							<p class="txt">약관 동의</p>
-						</div>
+							<li>
+								<div class="img">
+									<a href="#"><img src="images/img/sample_event.jpg" alt="진행중 이벤트" /></a>
+								</div>
+								<div class="txt">
+									<div class="subject">까페모리 봄바람 커피한잔 30% 할인 이벤트!!</div>
+									<div class="day">이벤트 기간 : 2014-04-01 ~ 2014-04-29</div>
+								</div>
+							</li>
 
-						<div class="step">
-							<p class="web">STEP 03</p>
-							<p class="txt"><span>회원정보</span> <span>입력</span></p>
-						</div>
+							<li>
+								<div class="img">
+									<a href="#"><img src="images/img/sample_event.jpg" alt="진행중 이벤트" /></a>
+								</div>
+								<div class="txt">
+									<div class="subject">까페모리 봄바람 커피한잔 30% 할인 이벤트!!</div>
+									<div class="day">이벤트 기간 : 2014-04-01 ~ 2014-04-29</div>
+								</div>
+							</li>
 
-						<div class="step stepon">
-							<p class="web">STEP 04</p>
-							<p class="txt"><span>회원가입</span> <span>완료</span></p>
-							<p class="ck"><img src="images/bg/bg_step.png" alt="현재위치" /></p>
-						</div>
+							<li>
+								<div class="img">
+									<a href="#"><img src="images/img/sample_event.jpg" alt="진행중 이벤트" /></a>
+								</div>
+								<div class="txt">
+									<div class="subject">까페모리 봄바람 커피한잔 30% 할인 이벤트!!</div>
+									<div class="day">이벤트 기간 : 2014-04-01 ~ 2014-04-29</div>
+								</div>
+							</li>
+						</ul>
 					</div>
-					<!-- //STEP -->
+					<!-- //list -->
+
+					<div class="btnAreaList">
+						<!-- 페이징이동1 -->
+						<div class="allPageMoving1">
+
+						<a href="#" class="n"><img src="images/btn/btn_pre2.gif" alt="처음으로"/></a><a href="#" class="pre"><img src="images/btn/btn_pre1.gif" alt="앞페이지로"/></a>
+						<strong>1</strong>
+						<a href="#">2</a>
+						<a href="#">3</a>
+						<a href="#">4</a>
+						<a href="#">5</a>
+						<a href="#" class="next"><img src="images/btn/btn_next1.gif" alt="뒤페이지로"/></a><a href="#" class="n"><img src="images/btn/btn_next2.gif" alt="마지막페이지로"/></a>
+
+						</div>
+						<!-- //페이징이동1 -->
+					</div>
 					
-					<div class="celebrate">	
-						<div class="img"><img src="images/txt/txt_celebrate01.png" alt="JARDIN THECOFFEE CERATOR, SINCE 1984" /></div>
-						<p class="thx">감사합니다. <span>회원가입이 완료되었습니다.</span></p>
-						<p class="txt">
-							저희 가족이 되어주셔서 감사합니다.<br/>
-							가입 시 입력하신 이메일로 가입 완료 메일이 전송되었습니다.<br/>
-							언제나 고객님께 즐겁고 소중한 시간이 되도록 최선을 다 하겠습니다.<br/><br/>
-							가입 시 입력하신 정보는 마이페이지에서 수정하실 수 있습니다.
-						</p>
-					</div>
-
-					<!-- Btn Area -->
-					<div class="btnArea">
-						<div class="bCenter">
+					<!-- 검색 -->
+					<div class="searchWrap">
+						<div class="search">
 							<ul>
-								<li><a href="#" class="nbtnbig">메인으로</a></li>
-								<li><a href="login" class="sbtnMini">로그인</a></li>
+								<li class="web"><img src="images/txt/txt_search.gif" alt="search" /></li>
+								<li class="se">
+									<select>
+										<option value="" />제목</option>
+									</select>
+								</li>
+								<li><input type="text" class="searchInput" /></li>
+								<li class="web"><a href="#"><img src="images/btn/btn_search.gif" alt="검색" /></a></li>
+								<li class="mobile"><a href="#"><img src="images/btn/btn_search_m.gif" alt="검색" /></a></li>
 							</ul>
 						</div>
 					</div>
-					<!-- //Btn Area -->
-
+					<!-- //검색 -->
 
 				</div>
 			</div>
 			<!-- //contents -->
 
-
 		</div>
+
+		<!-- quickmenu -->
+		<div id="quick">
+			<div class="cart"><a href="#">장바구니</a></div>
+			<div class="wish">
+				<p class="title">위시 리스트</p>
+				
+				<div class="list">
+					<ul>	
+						<li><a href="#"><img src="images/img/sample_wish.gif" alt="" /></a>
+						<li><a href="#"><img src="images/img/sample_wish.gif" alt="" /></a>
+						<li><a href="#"><img src="images/img/sample_wish.gif" alt="" /></a>
+						<li><a href="#"><img src="images/img/sample_wish.gif" alt="" /></a>
+						<li><a href="#"><img src="images/img/sample_wish.gif" alt="" /></a>
+						<li><a href="#"><img src="images/img/sample_wish.gif" alt="" /></a>
+						<li><a href="#"><img src="images/img/sample_wish.gif" alt="" /></a>
+						<li><a href="#"><img src="images/img/sample_wish.gif" alt="" /></a>
+						<li><a href="#"><img src="images/img/sample_wish.gif" alt="" /></a>
+						<li><a href="#"><img src="images/img/sample_wish.gif" alt="" /></a>
+						<li><a href="#"><img src="images/img/sample_wish.gif" alt="" /></a>
+						<li><a href="#"><img src="images/img/sample_wish.gif" alt="" /></a>
+						<li><a href="#"><img src="images/img/sample_wish.gif" alt="" /></a>
+						<li><a href="#"><img src="images/img/sample_wish.gif" alt="" /></a>
+						<li><a href="#"><img src="images/img/sample_wish.gif" alt="" /></a>
+					</ul>
+				</div>
+
+				<div class="total">
+					<a href="#none" class="wishLeft"><img src="images/btn/wish_left.gif" alt="" /></a>
+					 <span class="page">1</span> / <span class="sum">3</span>
+					<a href="#none" class="wishRight"><img src="images/btn/wish_right.gif" alt="" /></a>
+				</div>
+
+			</div>
+
+			<div class="top"><a href="#">TOP&nbsp;&nbsp;<img src="images/ico/ico_top.gif" alt="" /></a></div>
+		</div>
+		<script type="text/javascript">
+		$(function(){
+			
+			$(window).scroll(function(){
+				var tg = $("div#quick");
+				var xg = $("div#container");
+				var limit = xg.height()- 500;
+				var tmp = $(window).scrollTop();
+
+				if (tmp > limit) {
+					tg.css({"position" : "absolute","right" : "-150px","bottom" : "220px","top" : "auto"});
+				}
+				else {
+					tg.css({"position" : "fixed","top" : "314px" , "margin-left" : "940px","right" : "auto"});
+				}
+			});
+
+		});
+		</script>
+		<!-- //quickmenu -->
+
 	</div>
 	<!-- //container -->
 

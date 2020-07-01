@@ -31,9 +31,6 @@ $(document).ready(function() {
 
 });
 </script>
-
-
-</script>
 </head>
 <body>
 
@@ -193,82 +190,157 @@ $(document).ready(function() {
 		<div id="location">
 			<ol>
 				<li><a href="#">HOME</a></li>
-				<li><a href="#">MEMBERSHIP</a></li>
-				<li class="last">회원가입</li>
+				<li><a href="#">EVENT</a></li>
+				<li class="last">진행중 이벤트</li>
 			</ol>
 		</div>
 		
 		<div id="outbox">		
 			<div id="left">
-				<div id="title2">MEMBERSHIP<span>멤버쉽</span></div>
+				<div id="title2">EVENT<span>이벤트</span></div>
 				<ul>	
-					<li><a href="#" id="leftNavi1">로그인</a></li>
-					<li><a href="#" id="leftNavi2">회원가입</a></li>
-					<li><a href="#" id="leftNavi3">아이디/<span>비밀번호 찾기</span></a></li>
-					<li><a href="#" id="leftNavi4">회원약관</a></li>
-					<li><a href="#" id="leftNavi5">개인정보<span>취급방침</span></a></li>
-					<li class="last"><a href="#" id="leftNavi6">이메일무단<span>수집거부</span></a></li>
+					<li><a href="#" id="leftNavi1">진행중 이벤트</a></li>
+					<li><a href="#" id="leftNavi2">종료된 이벤트</a></li>
+					<li class="last"><a href="#" id="leftNavi3">당첨자 발표</span></a></li>
 				</ul>			
-			</div><script type="text/javascript">initSubmenu(2,0);</script>
+			</div><script type="text/javascript">initSubmenu(1,0);</script>
 
 
 			<!-- contents -->
 			<div id="contents">
-				<div id="member">
-					<h2><strong>회원가입</strong><span>회원으로 가입하시면 보다 더 다양한 혜택을 누리실 수 있습니다.</span></h2>
+				<div id="mypage">
+					<h2><strong>진행중 이벤트</strong><span>쟈뎅샵의 특별한 혜택이 가득한 이벤트에 참여해 보세요.</span></h2>
 					
-					<!-- STEP -->
-					<div class="stepWrap">
-						<div class="step">
-							<p class="web">STEP 01</p>
-							<p class="txt">실명확인</p>							
+					<div class="viewDivMt">
+						<div class="viewHead">
+							<div class="subject">
+								<ul>
+									<li>까페모리 봄바람 커피한잔 30% 할인 이벤트!!</li>
+								</ul>
+							</div>
+							<div class="day">
+								<p class="txt">이벤트 기간<span>2014-04-01 ~ 2014-04-29</span></p>
+							</div>
 						</div>
 
-						<div class="step">
-							<p class="web">STEP 02</p>
-							<p class="txt">약관 동의</p>
-						</div>
-
-						<div class="step">
-							<p class="web">STEP 03</p>
-							<p class="txt"><span>회원정보</span> <span>입력</span></p>
-						</div>
-
-						<div class="step stepon">
-							<p class="web">STEP 04</p>
-							<p class="txt"><span>회원가입</span> <span>완료</span></p>
-							<p class="ck"><img src="images/bg/bg_step.png" alt="현재위치" /></p>
+						<div class="viewContents">
+							<img src="images/img/sample_event_view.jpg" alt="" />
 						</div>
 					</div>
-					<!-- //STEP -->
-					
-					<div class="celebrate">	
-						<div class="img"><img src="images/txt/txt_celebrate01.png" alt="JARDIN THECOFFEE CERATOR, SINCE 1984" /></div>
-						<p class="thx">감사합니다. <span>회원가입이 완료되었습니다.</span></p>
-						<p class="txt">
-							저희 가족이 되어주셔서 감사합니다.<br/>
-							가입 시 입력하신 이메일로 가입 완료 메일이 전송되었습니다.<br/>
-							언제나 고객님께 즐겁고 소중한 시간이 되도록 최선을 다 하겠습니다.<br/><br/>
-							가입 시 입력하신 정보는 마이페이지에서 수정하실 수 있습니다.
-						</p>
+
+
+					<!-- 이전다음글 -->
+					<div class="pnDiv web">
+						<table summary="이전다음글을 선택하여 보실 수 있습니다." class="preNext" border="1" cellspacing="0">
+							<caption>이전다음글</caption>
+							<colgroup>
+							<col width="100px" />
+							<col width="*" />
+							<col width="100px" />
+							</colgroup>
+							<tbody>
+								<tr>
+									<th class="pre">PREV</th>
+									<td><a href="#">상품 재입고는 언제 되나요?</a></td>
+									<td>&nbsp;</td>
+								</tr>
+
+								<tr>
+									<th class="next">NEXT</th>
+									<td>다음 글이 없습니다.</td>
+									<td>&nbsp;</td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
+					<!-- //이전다음글 -->
+
+
+					<!-- 댓글-->
+					<div class="replyWrite">
+						<ul>
+							<li class="in">
+								<p class="txt">총 <span class="orange">3</span> 개의 댓글이 달려있습니다.</p>
+								<p class="password">비밀번호&nbsp;&nbsp;<input type="password" class="replynum" /></p>
+								<textarea class="replyType"></textarea>
+							</li>
+							<li class="btn"><a href="#" class="replyBtn">등록</a></li>
+						</ul>
+						<p class="ntic">※ 비밀번호를 입력하시면 댓글이 비밀글로 등록 됩니다.</p>
+					</div>
+
+					<div class="replyBox">
+						<ul>
+							<li class="name">jjabcde <span>[2014-03-04&nbsp;&nbsp;15:01:59]</span></li>
+							<li class="txt"><textarea class="replyType"></textarea></li>
+							<li class="btn">
+								<a href="#" class="rebtn">수정</a>
+								<a href="#" class="rebtn">삭제</a>
+							</li>
+						</ul>
+
+						<ul>
+							<li class="name">jjabcde <span>[2014-03-04&nbsp;&nbsp;15:01:59]</span></li>
+							<li class="txt">대박!!! 이거 저한테 완전 필요한 이벤트였어요!!</li>
+							<li class="btn">
+								<a href="#" class="rebtn">수정</a>
+								<a href="#" class="rebtn">삭제</a>
+							</li>
+						</ul>
+
+						<ul>
+							<li class="name">jjabcde <span>[2014-03-04&nbsp;&nbsp;15:01:59]</span></li>
+							<li class="txt">
+								<a href="password.html" class="passwordBtn"><span class="orange">※ 비밀글입니다.</span></a>
+							</li>
+						</ul>
+					</div>
+					<!-- //댓글 -->
+
 
 					<!-- Btn Area -->
 					<div class="btnArea">
-						<div class="bCenter">
+						<div class="bRight">
 							<ul>
-								<li><a href="#" class="nbtnbig">메인으로</a></li>
-								<li><a href="login" class="sbtnMini">로그인</a></li>
+								<li><a href="#" class="sbtnMini mw">목록</a></li>
 							</ul>
 						</div>
 					</div>
 					<!-- //Btn Area -->
-
-
+					
 				</div>
 			</div>
 			<!-- //contents -->
 
+
+<script type="text/javascript" src="js/jquery.fancybox-1.3.4.pack.js"></script>
+<link rel="stylesheet" type="text/css" href="css/jquery.fancybox-1.3.4.css" />
+<script type="text/javascript">
+$(function(){
+	
+	var winWidth = $(window).width();
+	if(winWidth > 767){
+		var layerCheck = 540;
+	}else{
+		var layerCheck = 320;
+	}
+
+	$(".passwordBtn").fancybox({
+		'autoDimensions'    : false,
+		'showCloseButton'	: false,
+		'width' : layerCheck,
+		'padding' : 0,
+		'type'			: 'iframe',
+		'onComplete' : function() {
+			$('#fancybox-frame').load(function() { // wait for frame to load and then gets it's height
+			$('#fancybox-content').height($(this).contents().find('body').height());
+			});
+		}
+	});
+
+
+});
+</script>
 
 		</div>
 	</div>

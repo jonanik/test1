@@ -9,6 +9,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="list" resultType="com.jardin.shop11.dto.BoardDto">
 		select * from board
 	</select>
-	
 
+<insert id="join">
+insert into member (memNo,memName,memId,memPw,email,emailReceive,
+					address,phone,smsReceive,birth,solarLunar,
+					business,businessNum,bussinessImage,joinDate) 
+			values (member_seq.nextval,#{memName},#{memId},#{memPw},
+			#{email},#{emailReceive},#{address},#{phone},#{smsReceive},
+			#{birth},#{solarLunar},#{business},#{businessNum},#{bussinessImage},
+			sysdate)
+</insert>
+<select id="loginOk" resultType="com.jardin.shop11.dto.LoginDto">
+		select count(*) loginCheck from member where memId=#{memId} and memPw=#{memPw}
+	</select>
 </mapper>
