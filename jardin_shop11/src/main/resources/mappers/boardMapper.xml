@@ -10,6 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from board
 	</select>
 
+<!-- 회원가입 -->
 <insert id="join">
 insert into member (memNo,memName,memId,memPw,email,emailReceive,
 					address,phone,smsReceive,birth,solarLunar,
@@ -19,10 +20,20 @@ insert into member (memNo,memName,memId,memPw,email,emailReceive,
 			#{birth},#{solarLunar},#{business},#{businessNum},#{bussinessImage},
 			sysdate)
 </insert>
+
+<!-- 로그인 -->
 <select id="loginOk" resultType="com.jardin.shop11.dto.LoginDto">
 		select count(*) loginCheck from member where memId=#{memId} and memPw=#{memPw}
 	</select>
-	<insert id="eventWrite">
+	
+<!-- 이벤트 글작성 -->
+<insert id="eventWrite">
 	insert into event values(event_seq.nextval,#{eventImage},#{title},#{content},#{startDate},#{endDate},#{thumbnail})
-	</insert>
+</insert>
+
+<!-- 이벤트 리스트 가져오기 -->
+ <select id="eventList" resultType="com.jardin.shop11.dto.EventDto">
+	select * from event
+ </select>
+ 
 </mapper>

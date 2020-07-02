@@ -1,5 +1,7 @@
 package com.jardin.shop11.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.jardin.shop11.dto.EventDto;
 import com.jardin.shop11.dto.JoinDto;
 import com.jardin.shop11.dto.LoginDto;
 import com.jardin.shop11.service.BoardService;
@@ -26,7 +29,7 @@ public class BoardController {
 	// 리스트 출력
 	@RequestMapping("list")
 	public String list(Model model) {
-		model.addAttribute("list", boardService.list(model));
+		model.addAttribute("list", boardService.list());
 		return "list";
 	}
 
@@ -57,12 +60,6 @@ public class BoardController {
 		return "main/main";
 	}
 
-	// 이벤트리스트 출력
-	@RequestMapping("event")
-	public String eventList() {
-		return "event/event";
-	}
-
 	// 이벤트글 상세페이지
 	@RequestMapping("eventView")
 	public String eventView() {
@@ -76,20 +73,16 @@ public class BoardController {
 	}
 
 	// 이벤트 글 작성(insert)
-//	@RequestMapping("eventWrite")
-//	public String eventWrite(MultipartHttpServletRequest multi, EventDto eventDto) {
-//		boardService.eventWrite(multi, eventDto);
-//
-//		return "event/event";
-//	}
-
 	@RequestMapping("eventWrite")
-	public String eventWrite(MultipartFile multi) {
+	public String eventWrite(List<MultipartFile> multi, EventDto eventDto) throws Exception {
+		boardService.eventWrite(multi, eventDto);
+		return "redirect:event";
+	}
 
-		// System.out.println(eventDto);
-		System.out.println(multi);
-		// boardService.eventWrite(multi, eventDto);
-
+	// 이벤트 글 리스트 출력
+	@RequestMapping("event")
+	public String eventList(Model model) {
+		model.addAttribute("eventList", boardService.eventList());
 		return "event/event";
 	}
 

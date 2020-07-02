@@ -11,7 +11,7 @@
 </script>
 </head>
 <body>
-	<form action="eventWrite" name="eventWriteForm" enctype="multipart/form-data">
+	<form action="eventWrite" name="eventWriteForm" enctype="multipart/form-data" method="post">
 		<table border="1">
 			<tr>
 				<th>이벤트 제목</th>
@@ -27,7 +27,7 @@
 			</tr>
 			<tr>
 				<th>이벤트 내용 이미지</th>
-				<td><input type="file" name="multi2"></td>
+				<td><input type="file" name="multi"></td>
 			</tr>
 			<tr>
 				<th>이벤트 기간</th>

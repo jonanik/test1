@@ -1,13 +1,15 @@
 package com.jardin.shop11.dto;
 
-public class EventDto {
+import java.sql.Date;
 
+public class EventDto {
+	String eventNo;
 	String title;
 	String content;
 	String thumbnail;
 	String eventImage;
-	String startDate;
-	String endDate;
+	Date startDate;
+	Date endDate;
 
 	public String getTitle() {
 		return title;
@@ -41,19 +43,19 @@ public class EventDto {
 		this.eventImage = eventImage;
 	}
 
-	public String getStartDate() {
+	public Date getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(String startDate) {
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 
-	public String getEndDate() {
+	public Date getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(String endDate) {
+	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
 

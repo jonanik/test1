@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.ui.Model;
 
 import com.jardin.shop11.dto.BoardDto;
 import com.jardin.shop11.dto.EventDto;
@@ -20,7 +19,7 @@ public class BoardDaoImpl implements BoardDao {
 
 	// 리스트 출력 test
 	@Override
-	public List<BoardDto> list(Model model) {
+	public List<BoardDto> list() {
 
 		return sqlSession.selectList("board.list");
 	}
@@ -42,7 +41,11 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public void eventWrite(EventDto eventDto) {
 		sqlSession.insert("board.eventWrite", eventDto);
+	}
 
+	// 이벤트 리스트 출력
+	public List<EventDto> eventList() {
+		return sqlSession.selectList("board.eventList");
 	}
 
 }

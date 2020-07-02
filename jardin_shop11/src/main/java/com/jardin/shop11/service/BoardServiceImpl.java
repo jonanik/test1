@@ -7,9 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.jardin.shop11.dao.BoardDao;
 import com.jardin.shop11.dto.BoardDto;
@@ -25,9 +23,9 @@ public class BoardServiceImpl implements BoardService {
 
 	// 리스트 출력 test
 	@Override
-	public List<BoardDto> list(Model model) {
+	public List<BoardDto> list() {
 
-		return boardDao.list(model);
+		return boardDao.list();
 	}
 
 	// 회원가입 test
@@ -51,40 +49,36 @@ public class BoardServiceImpl implements BoardService {
 
 	// 이벤트
 	@Override
-	public void eventWrite(MultipartHttpServletRequest multi, EventDto eventDto) {
-		String title = multi.getParameter("title");
-		String content = multi.getParameter("content");
-		String startDate = multi.getParameter("startDate");
-		String endDate = multi.getParameter("endDate");
-		MultipartFile mpf1 = multi.getFile("thumbnail");
-		MultipartFile mpf2 = multi.getFile("eventImage");
+	public void eventWrite(List<MultipartFile> multi, EventDto eventDto) throws Exception {
+		// 실제파일을 받아온다
+		MultipartFile mpf1 = multi.get(0);
+		MultipartFile mpf2 = multi.get(1);
+		// 파일경로설정
+		String path = "C:/Users/user/git/test(0630)/jardin_shop11/src/main/webapp/resources/eventImage/";
 
-		String path = "C:/eventImage/";
-
+		// 파일의 이름을 String형식으로 가져온다.
 		String filename1 = mpf1.getOriginalFilename();
 		String filename2 = mpf2.getOriginalFilename();
 
+		// db에 올리기전에 현재 밀리세컨즈를 붙여서 이름을 정해준다.
 		String thumbnail = System.currentTimeMillis() + filename1;
 		String eventImage = System.currentTimeMillis() + filename2;
 
-		try {
-			mpf1.transferTo(new File(path + thumbnail));
-			mpf2.transferTo(new File(path + content));
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		// 실제로 파일을 경로에 따른 폴터에 보내준다.
+		mpf1.transferTo(new File(path + thumbnail));
+		mpf2.transferTo(new File(path + eventImage));
 
-		eventDto.setTitle(title);
-		eventDto.setContent(content);
-		eventDto.setTitle(startDate);
-		eventDto.setTitle(endDate);
-		eventDto.setTitle(thumbnail);
-		eventDto.setTitle(eventImage);
+		eventDto.setThumbnail(thumbnail);
+		eventDto.setEventImage(eventImage);
 
 		boardDao.eventWrite(eventDto);
 
+	}
+
+	// 이벤트 리스트 출력
+	public List<EventDto> eventList() {
+
+		return boardDao.eventList();
 	}
 
 }

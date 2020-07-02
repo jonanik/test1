@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -215,15 +217,18 @@ $(document).ready(function() {
 					<div class="eventList">
 						<ul>
 							<!-- 반복 -->
+							<c:forEach var="eventList" items="${eventList}">
 							<li>
 								<div class="img">
-									<a href="eventView"><img src="images/img/sample_event.jpg" alt="진행중 이벤트" /></a>
+									<a href="eventView"><img src="eventImage/${eventList.thumbnail}" alt="진행중 이벤트" /></a>
 								</div>
 								<div class="txt">
-									<div class="subject">까페모리 봄바람 커피한잔 30% 할인 이벤트!!까페모리 봄바람 커피한잔 30% 할인 이벤트!!</div>
-									<div class="day">이벤트 기간 : 2014-04-01 ~ 2014-04-29</div>
+									<div class="subject">${eventList.title}</div>
+									<div class="day">이벤트 기간 : <fmt:formatDate value="${eventList.startDate}" pattern="yyyy-MM-dd" var="startDate" /> ~ <fmt:formatDate value="${eventList.endDate}" pattern="yyyy-MM-dd" var="endDate" /></div>
 								</div>
 							</li>
+							</c:forEach>
+							</ul>
 							<!-- //반복 -->
 					<!-- //list -->
 

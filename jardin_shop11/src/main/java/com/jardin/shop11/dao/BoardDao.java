@@ -2,8 +2,6 @@ package com.jardin.shop11.dao;
 
 import java.util.List;
 
-import org.springframework.ui.Model;
-
 import com.jardin.shop11.dto.BoardDto;
 import com.jardin.shop11.dto.EventDto;
 import com.jardin.shop11.dto.JoinDto;
@@ -12,7 +10,7 @@ import com.jardin.shop11.dto.LoginDto;
 public interface BoardDao {
 
 	// 리스트 출력 test
-	public List<BoardDto> list(Model model);
+	public List<BoardDto> list();
 
 	// 회원가입 test
 	public void join(JoinDto joinDto);
@@ -22,4 +20,7 @@ public interface BoardDao {
 
 	// 이벤트 글 작성(insert)
 	public void eventWrite(EventDto eventDto);
+
+	// 이벤트 리스트 출력
+	public List<EventDto> eventList();
 }
