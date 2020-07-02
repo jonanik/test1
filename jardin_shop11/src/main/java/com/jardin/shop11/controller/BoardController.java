@@ -4,10 +4,12 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.omg.CORBA.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jardin.shop11.dto.EventDto;
@@ -38,6 +40,12 @@ public class BoardController {
 	public String join(JoinDto joinDto) {
 		boardService.join(joinDto);
 		return "join/joinOk";
+	}
+	@RequestMapping("ajaxIdCheck")
+	@ResponseBody
+	public int idCheck(String memId) {
+		
+		return boardService.idCheck(memId);
 	}
 
 	// 회원가입 완료페이지 불러오기

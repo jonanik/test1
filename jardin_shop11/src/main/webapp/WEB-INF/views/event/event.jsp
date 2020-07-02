@@ -220,11 +220,11 @@ $(document).ready(function() {
 							<c:forEach var="eventList" items="${eventList}">
 							<li>
 								<div class="img">
-									<a href="eventView"><img src="eventImage/${eventList.thumbnail}" alt="진행중 이벤트" /></a>
+									<a href="eventView"><img src="resources/eventImage/${eventList.thumbnail}" alt="진행중 이벤트" /></a>
 								</div>
 								<div class="txt">
 									<div class="subject">${eventList.title}</div>
-									<div class="day">이벤트 기간 : <fmt:formatDate value="${eventList.startDate}" pattern="yyyy-MM-dd" var="startDate" /> ~ <fmt:formatDate value="${eventList.endDate}" pattern="yyyy-MM-dd" var="endDate" /></div>
+									<div class="day">이벤트 기간 : <fmt:formatDate value="${eventList.startDate}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${eventList.endDate}" pattern="yyyy-MM-dd"/></div>
 								</div>
 							</li>
 							</c:forEach>

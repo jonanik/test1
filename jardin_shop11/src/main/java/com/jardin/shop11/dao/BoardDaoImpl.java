@@ -17,18 +17,24 @@ public class BoardDaoImpl implements BoardDao {
 	@Autowired
 	SqlSession sqlSession;
 
-	// 리스트 출력 test
+	// 리스트 출력 
 	@Override
 	public List<BoardDto> list() {
 
 		return sqlSession.selectList("board.list");
 	}
 
-	// 회원가입 test
+	// 회원가입 
 	@Override
 	public void join(JoinDto joinDto) {
 		sqlSession.insert("board.join", joinDto);
 
+	}
+	
+	@Override
+	public int idCheck(String memId) {
+		
+		return sqlSession.selectOne("board.idCehck",memId);
 	}
 
 	// 로그인 체크 - 아이디와 비밀번호가 멤버테이블에 있는지 비교 확인하여 세션 부여
@@ -47,5 +53,7 @@ public class BoardDaoImpl implements BoardDao {
 	public List<EventDto> eventList() {
 		return sqlSession.selectList("board.eventList");
 	}
+
+
 
 }

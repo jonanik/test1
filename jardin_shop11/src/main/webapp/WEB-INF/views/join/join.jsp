@@ -36,6 +36,23 @@ $(document).ready(function() {
 });
 </script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script type="text/javascript">
+function idCehck(){
+	var memId=$('#memId').val();
+	$.ajax({
+		type : 'post',
+		url : './ajaxIdCheck?memId='+memId,
+		contentType:"application/json; charset=utf-8;",
+		success : function(data){
+			if(data==1)
+			$('#id_check').text("사용중인 아이디입니다.");
+			$('#id_check').css("color","red");
+			$("")
+		}
+		
+	})
+}
+</script>
 <script>
     //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
     function sample4_execDaumPostcode() {
@@ -340,7 +357,7 @@ $(document).ready(function() {
 									<li>* 표시된 항목은 필수 항목이므로 반드시 입력하셔야 회원가입이 진행됩니다.</li>
 								</ul>
 							</div>
-							<form action="joinOk" name="joinForm" enctype="enctype multipart/form-data">
+							<form action="joinOk" name="joinForm" enctype="enctype multipart/form-data" method="post">
 
 								<div class="memberbd">
 									<table

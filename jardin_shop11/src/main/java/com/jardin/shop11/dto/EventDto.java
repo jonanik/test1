@@ -3,13 +3,23 @@ package com.jardin.shop11.dto;
 import java.sql.Date;
 
 public class EventDto {
-	String eventNo;
+	int eventNo;
 	String title;
 	String content;
 	String thumbnail;
 	String eventImage;
 	Date startDate;
 	Date endDate;
+
+	
+	
+	public int getEventNo() {
+		return eventNo;
+	}
+
+	public void setEventNo(int eventNo) {
+		this.eventNo = eventNo;
+	}
 
 	public String getTitle() {
 		return title;

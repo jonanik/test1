@@ -26,7 +26,7 @@ table, tr, td {
 
 	//리스트 가져오기 ajax
 	function ajax_view() { //클릭해서 이 펑션을 실행해주게 한다.
-
+	
 		$.ajax({
 			type : 'post',
 			url : './ajax_view', //맵핑 명을 적어줌

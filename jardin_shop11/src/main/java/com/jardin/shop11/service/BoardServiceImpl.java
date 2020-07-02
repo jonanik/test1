@@ -35,6 +35,12 @@ public class BoardServiceImpl implements BoardService {
 
 	}
 
+	@Override
+	public int idCheck(String memId) {
+		
+		return boardDao.idCheck(memId);
+	}
+	
 	// 로그인 체크 - 아이디와 비밀번호가 멤버테이블에 있는지 비교 확인하여 세션 부여
 	@Override
 	public void loginOk(LoginDto loginDto, HttpSession session) {
@@ -54,7 +60,7 @@ public class BoardServiceImpl implements BoardService {
 		MultipartFile mpf1 = multi.get(0);
 		MultipartFile mpf2 = multi.get(1);
 		// 파일경로설정
-		String path = "C:/Users/user/git/test(0630)/jardin_shop11/src/main/webapp/resources/eventImage/";
+		String path = "C:/Users/yohan/git/test1/jardin_shop11/src/main/webapp/resources/eventImage/";
 
 		// 파일의 이름을 String형식으로 가져온다.
 		String filename1 = mpf1.getOriginalFilename();
@@ -80,5 +86,7 @@ public class BoardServiceImpl implements BoardService {
 
 		return boardDao.eventList();
 	}
+
+	
 
 }

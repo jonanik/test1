@@ -42,6 +42,25 @@ public class JoinDto {
 	private String business; // 사업자 인지 아닌지o
 	private int businessNum; // 사업자일 경우 사업자 번호
 	private String bussinessImage; // 사업자등록증 이미지
+	private String joinDate;
+	private String endDate;
+
+	
+	public String getJoinDate() {
+		return joinDate;
+	}
+
+	public void setJoinDate(String joinDate) {
+		this.joinDate = joinDate;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
 
 	public int getMemNo() {
 		return memNo;
