@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 
 import com.jardin.shop11.dto.BoardDto;
+import com.jardin.shop11.dto.EventDto;
 import com.jardin.shop11.dto.JoinDto;
 import com.jardin.shop11.dto.LoginDto;
 
@@ -35,6 +36,13 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public LoginDto loginOk(LoginDto loginDto) {
 		return sqlSession.selectOne("board.loginOk", loginDto);
+	}
+
+	// 이벤트 글 작성(insert)
+	@Override
+	public void eventWrite(EventDto eventDto) {
+		sqlSession.insert("board.eventWrite", eventDto);
+
 	}
 
 }

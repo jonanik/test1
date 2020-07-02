@@ -83,6 +83,10 @@
 			<scope>runtime</scope>
 		</dependency>
 
+<!-- JSON -->
+
+
+
 		<!-- @Inject -->
 		<dependency>
 			<groupId>javax.inject</groupId>

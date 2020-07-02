@@ -5,8 +5,10 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.jardin.shop11.dto.BoardDto;
+import com.jardin.shop11.dto.EventDto;
 import com.jardin.shop11.dto.JoinDto;
 import com.jardin.shop11.dto.LoginDto;
 
@@ -20,4 +22,6 @@ public interface BoardService {
 
 	// 로그인 체크 - 아이디와 비밀번호가 멤버테이블에 있는지 비교 확인하여 세션 부여
 	public void loginOk(LoginDto loginDto, HttpSession session);
+
+	public void eventWrite(MultipartHttpServletRequest multi, EventDto eventDto);
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.ui.Model;
 
 import com.jardin.shop11.dto.BoardDto;
+import com.jardin.shop11.dto.EventDto;
 import com.jardin.shop11.dto.JoinDto;
 import com.jardin.shop11.dto.LoginDto;
 
@@ -18,4 +19,7 @@ public interface BoardDao {
 
 	// 로그인 체크 - 아이디와 비밀번호가 멤버테이블에 있는지 비교 확인하여 세션 부여
 	public LoginDto loginOk(LoginDto loginDto);
+
+	// 이벤트 글 작성(insert)
+	public void eventWrite(EventDto eventDto);
 }

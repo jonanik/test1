@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.jardin.shop11.dto.JoinDto;
 import com.jardin.shop11.dto.LoginDto;
@@ -16,6 +17,11 @@ public class BoardController {
 
 	@Autowired
 	BoardService boardService;
+
+	@RequestMapping("main")
+	public String main() {
+		return "main/main";
+	}
 
 	// 리스트 출력
 	@RequestMapping("list")
@@ -57,9 +63,34 @@ public class BoardController {
 		return "event/event";
 	}
 
+	// 이벤트글 상세페이지
 	@RequestMapping("eventView")
 	public String eventView() {
 		return "event/eventView";
+	}
+
+	// 이벤트글 작성 페이지(관리자페이지 대신)
+	@RequestMapping("eventWriteForm")
+	public String eventWriteForm() {
+		return "event/eventWrite";
+	}
+
+	// 이벤트 글 작성(insert)
+//	@RequestMapping("eventWrite")
+//	public String eventWrite(MultipartHttpServletRequest multi, EventDto eventDto) {
+//		boardService.eventWrite(multi, eventDto);
+//
+//		return "event/event";
+//	}
+
+	@RequestMapping("eventWrite")
+	public String eventWrite(MultipartFile multi) {
+
+		// System.out.println(eventDto);
+		System.out.println(multi);
+		// boardService.eventWrite(multi, eventDto);
+
+		return "event/event";
 	}
 
 }

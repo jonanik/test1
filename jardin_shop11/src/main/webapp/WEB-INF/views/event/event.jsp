@@ -225,38 +225,6 @@ $(document).ready(function() {
 								</div>
 							</li>
 							<!-- //반복 -->
-
-							<li>
-								<div class="img">
-									<a href="#"><img src="images/img/sample_event.jpg" alt="진행중 이벤트" /></a>
-								</div>
-								<div class="txt">
-									<div class="subject">까페모리 봄바람 커피한잔 30% 할인 이벤트!!</div>
-									<div class="day">이벤트 기간 : 2014-04-01 ~ 2014-04-29</div>
-								</div>
-							</li>
-
-							<li>
-								<div class="img">
-									<a href="#"><img src="images/img/sample_event.jpg" alt="진행중 이벤트" /></a>
-								</div>
-								<div class="txt">
-									<div class="subject">까페모리 봄바람 커피한잔 30% 할인 이벤트!!</div>
-									<div class="day">이벤트 기간 : 2014-04-01 ~ 2014-04-29</div>
-								</div>
-							</li>
-
-							<li>
-								<div class="img">
-									<a href="#"><img src="images/img/sample_event.jpg" alt="진행중 이벤트" /></a>
-								</div>
-								<div class="txt">
-									<div class="subject">까페모리 봄바람 커피한잔 30% 할인 이벤트!!</div>
-									<div class="day">이벤트 기간 : 2014-04-01 ~ 2014-04-29</div>
-								</div>
-							</li>
-						</ul>
-					</div>
 					<!-- //list -->
 
 					<div class="btnAreaList">
@@ -301,35 +269,11 @@ $(document).ready(function() {
 
 		<!-- quickmenu -->
 		<div id="quick">
-			<div class="cart"><a href="#">장바구니</a></div>
+			<div class="cart"><a href="eventWriteForm">이벤트 글 작성</a></div>
 			<div class="wish">
-				<p class="title">위시 리스트</p>
 				
-				<div class="list">
-					<ul>	
-						<li><a href="#"><img src="images/img/sample_wish.gif" alt="" /></a>
-						<li><a href="#"><img src="images/img/sample_wish.gif" alt="" /></a>
-						<li><a href="#"><img src="images/img/sample_wish.gif" alt="" /></a>
-						<li><a href="#"><img src="images/img/sample_wish.gif" alt="" /></a>
-						<li><a href="#"><img src="images/img/sample_wish.gif" alt="" /></a>
-						<li><a href="#"><img src="images/img/sample_wish.gif" alt="" /></a>
-						<li><a href="#"><img src="images/img/sample_wish.gif" alt="" /></a>
-						<li><a href="#"><img src="images/img/sample_wish.gif" alt="" /></a>
-						<li><a href="#"><img src="images/img/sample_wish.gif" alt="" /></a>
-						<li><a href="#"><img src="images/img/sample_wish.gif" alt="" /></a>
-						<li><a href="#"><img src="images/img/sample_wish.gif" alt="" /></a>
-						<li><a href="#"><img src="images/img/sample_wish.gif" alt="" /></a>
-						<li><a href="#"><img src="images/img/sample_wish.gif" alt="" /></a>
-						<li><a href="#"><img src="images/img/sample_wish.gif" alt="" /></a>
-						<li><a href="#"><img src="images/img/sample_wish.gif" alt="" /></a>
-					</ul>
-				</div>
 
-				<div class="total">
-					<a href="#none" class="wishLeft"><img src="images/btn/wish_left.gif" alt="" /></a>
-					 <span class="page">1</span> / <span class="sum">3</span>
-					<a href="#none" class="wishRight"><img src="images/btn/wish_right.gif" alt="" /></a>
-				</div>
+				
 
 			</div>
 
