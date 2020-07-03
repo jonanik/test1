@@ -51,7 +51,7 @@ function idCheck(){
 			$('#id_check').css("color","red");
 			
 			}else{
-				$('#id_check').text("사용 가능한 아이디입니다.");
+				$('#id_check').text("사용가능한 아이디입니다.");
 				$('#id_check').css("color","blue");
 				return true;
 			}
@@ -210,14 +210,14 @@ function idCheck(){
 								alt="메뉴닫기" />
 						</div>
 						<ul>
-							<li><a href="#">EVENT</a></li>
+							<li><a href="event">EVENT</a></li>
 							<li><a href="#">CUSTOMER</a></li>
 							<li><a href="#">COMMUNITY</a></li>
 						</ul>
 					</div>
 					<div id="snb">
 						<ul>
-							<li><a href="#">LOGIN</a></li>
+							<li><a href="login">LOGIN</a></li>
 							<li><a href="#">JOIN</a></li>
 							<li><a href="#">MY PAGE</a></li>
 							<li><a href="#">CART</a></li>
@@ -389,8 +389,8 @@ function idCheck(){
 												<td>
 													<ul class="pta">
 														<li class="r10"><input type="text" name="memId"
-															id="memId" class="w134" /></li>
-														<li><button type="button" class="nbtnMini" onclick="idCheck()">중복확인</button></li>
+															id="memId" class="w134" onkeyup="idCheck()" /></li>
+<!-- 														<li><button type="button" class="nbtnMini" onclick="idCheck()">중복확인</button></li> -->
 														<li class="pt5"><span class="mvalign" id="id_check">첫 글자는
 																영문으로 4~16자 까지 가능, 영문, 숫자와 특수기호(_)만 사용 가능</span></li>
 													</ul>
@@ -413,8 +413,8 @@ function idCheck(){
 													<ul class="pta">
 														<li class="r10"><input type="password"
 															name="memPwCheck" class="w134" /></li>
-														<li><span class="mvalign black" id="pwMatch">* 비밀번호가 일치입니다.</span>
-															<span class="mvalign orange">* 비밀번호가 일치하지 않습니다.</span></li>
+<!-- 														<li><span class="mvalign black" id="pwMatch">* 비밀번호가 일치입니다.</span> -->
+<!-- 															<span class="mvalign orange">* 비밀번호가 일치하지 않습니다.</span></li> -->
 													</ul>
 												</td>
 											</tr>

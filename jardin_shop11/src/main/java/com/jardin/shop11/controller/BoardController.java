@@ -103,13 +103,27 @@ public class BoardController {
 		return "event/eventView";
 	}
 //-----------------------------------------------------------------------------------------
-	//댓글 쓰기
+	//댓글 쓰기(ajax)
 	@RequestMapping("eventReply")
-	public String eventReply(ReplyDto replyDto,RedirectAttributes redirect) {
-		
+	@ResponseBody
+	public void eventReply(ReplyDto replyDto,RedirectAttributes redirect) {
 		boardService.eventReplyWrite(replyDto);
-		redirect.addAttribute("eventNo",replyDto.getEventNo());
-		return "redirect:eventView";
 	}
+	//댓글 리스트 가져오기
+	@RequestMapping("replyList")
+	@ResponseBody
+	public List<ReplyDto> replyList(){
+		return boardService.replyList();
+	}
+	//댓글 삭제
+		@RequestMapping("replyDelete")
+		@ResponseBody
+		public void replyDelete(int replyNo){
+			System.out.println("컨트롤러 replyNo: "+replyNo);
+			 boardService.replyDelete(replyNo);
+		}
+	
+	
+	
 
 }

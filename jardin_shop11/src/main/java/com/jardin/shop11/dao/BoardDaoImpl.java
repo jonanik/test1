@@ -32,6 +32,7 @@ public class BoardDaoImpl implements BoardDao {
 
 	}
 	
+	//회원가입 아이디 중복체크
 	@Override
 	public int idCheck(String memId) {
 		
@@ -66,6 +67,17 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public void eventReplyWrite(ReplyDto replyDto) {
 		sqlSession.insert("board.eventReplyWrite",replyDto);
+	}
+	//이벤트 댓글 리스트 출력(selectList)
+	@Override
+	public List<ReplyDto> replyList() {
+		
+		return sqlSession.selectList("board.eventReplyList");
+	}
+	
+	//이벤트 댓글 삭제(delete)
+	public void replyDelete(int replyNo) {
+		sqlSession.delete("board.replyDelete",replyNo);
 	}
 
 

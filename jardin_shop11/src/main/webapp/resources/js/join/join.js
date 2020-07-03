@@ -44,8 +44,11 @@ function joinCheck(){
 		joinForm.memPwCheck.focus();
 		return false;
 	}
+	
 	if(!(joinForm.memPw.value==pwReCheck)){
-		alert("비밀번호가 일치하지 않습니다. 다시한번 확인해주세요.");
+		$("#pwCheck").text("비밀번호가 일치하지 않습니다.");
+		$("#pwCheck").css("color","red");
+//		alert("비밀번호가 일치하지 않습니다. 다시한번 확인해주세요.");
 		joinForm.memPwCheck.focus();
 		return false;
 	}

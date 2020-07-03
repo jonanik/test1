@@ -33,4 +33,10 @@ public interface BoardDao {
 	
 	//이벤트 댓글 쓰기
 	public void eventReplyWrite(ReplyDto replyDto);
+	
+	//이벤트 댓글 리스트 가져오기(selectList)
+	public List<ReplyDto> replyList();
+	
+	//이벤트 댓글 삭제
+	public void replyDelete(int replyDelete);
 }

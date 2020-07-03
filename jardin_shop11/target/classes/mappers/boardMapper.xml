@@ -26,12 +26,14 @@ insert into member (memNo,memName,memId,memPw,email,emailReceive,
 select count(*) from member where memId=#{memId}
 
 </select>
-
+<!-- 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인-->
 <!-- 로그인 -->
 <select id="loginOk" resultType="com.jardin.shop11.dto.LoginDto">
 		select count(*) loginCheck from member where memId=#{memId} and memPw=#{memPw}
 	</select>
-	
+<!-- 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인-->	
+
+<!-- 이벤트 이벤트 이벤트 이벤트 이벤트 이벤트 이벤트 이벤트 이벤트 이벤트 이벤트 이벤트 이벤트 이벤트 이벤트 이벤트 이벤트 이벤트 이벤트 이벤트 이벤트 이벤트 이벤트 -->
 <!-- 이벤트 글작성 -->
 <insert id="eventWrite">
 	insert into event values(event_seq.nextval,#{title},#{content},#{thumbnail},#{eventImage},#{startDate},#{endDate})
@@ -47,7 +49,17 @@ select count(*) from member where memId=#{memId}
 	select * from event where eventNo=#{eventNo}
 </select>
 
+<!-- 이벤트 댓글 쓰기 -->
 <insert id="eventReplyWrite">
 	insert into reply values(reply_seq.nextval,#{eventNo},#{memId},#{replyPw},#{content},sysdate)
 </insert>
+
+<!-- 이벤트 댓글 리스트 출력 -->
+<select id="eventReplyList" resultType="com.jardin.shop11.dto.ReplyDto">
+	select * from reply order by replyDate desc
+</select>
+
+<delete id="replyDelete">
+	delete reply where replyNo=#{replyNo}
+</delete>
 </mapper>

@@ -95,10 +95,22 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.eventView(eventDto);
 	}
 
-	//이벤트 댓글 쓰기
+	//이벤트 댓글 쓰기(insert)
 	@Override
 	public void eventReplyWrite(ReplyDto replyDto) {
 		 boardDao.eventReplyWrite(replyDto);
+	}
+	
+	//이벤트 댓글 리스트 가져오기(selectList)
+	@Override
+	public List<ReplyDto> replyList() {
+		
+		return boardDao.replyList();
+	}
+
+	@Override
+	public void replyDelete(int replyNo) {
+		 boardDao.replyDelete(replyNo);
 	}
 
 	
