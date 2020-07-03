@@ -6,6 +6,7 @@ import com.jardin.shop11.dto.BoardDto;
 import com.jardin.shop11.dto.EventDto;
 import com.jardin.shop11.dto.JoinDto;
 import com.jardin.shop11.dto.LoginDto;
+import com.jardin.shop11.dto.ReplyDto;
 
 public interface BoardDao {
 
@@ -26,4 +27,10 @@ public interface BoardDao {
 
 	// 이벤트 리스트 출력
 	public List<EventDto> eventList();
+	
+	//이벤트 상세페이지 출력
+	public EventDto eventView(EventDto eventDto);
+	
+	//이벤트 댓글 쓰기
+	public void eventReplyWrite(ReplyDto replyDto);
 }

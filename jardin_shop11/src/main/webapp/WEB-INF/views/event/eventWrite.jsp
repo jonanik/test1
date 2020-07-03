@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +12,7 @@
 </script>
 </head>
 <body>
-	<form action="eventWrite" name="eventWriteForm" enctype="multipart/form-data" method="post">
+	<form action="eventWrite" name="eventWriteForm" enctype="multipart/form-data" method="post" >
 		<table border="1">
 			<tr>
 				<th>이벤트 제목</th>

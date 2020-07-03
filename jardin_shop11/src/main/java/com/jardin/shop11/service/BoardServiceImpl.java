@@ -14,6 +14,7 @@ import com.jardin.shop11.dto.BoardDto;
 import com.jardin.shop11.dto.EventDto;
 import com.jardin.shop11.dto.JoinDto;
 import com.jardin.shop11.dto.LoginDto;
+import com.jardin.shop11.dto.ReplyDto;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -85,6 +86,19 @@ public class BoardServiceImpl implements BoardService {
 	public List<EventDto> eventList() {
 
 		return boardDao.eventList();
+	}
+
+	//이벤트 상세페이지 출력
+	@Override
+	public EventDto eventView(EventDto eventDto) {
+		
+		return boardDao.eventView(eventDto);
+	}
+
+	//이벤트 댓글 쓰기
+	@Override
+	public void eventReplyWrite(ReplyDto replyDto) {
+		 boardDao.eventReplyWrite(replyDto);
 	}
 
 	

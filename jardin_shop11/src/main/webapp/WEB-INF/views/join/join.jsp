@@ -37,20 +37,30 @@ $(document).ready(function() {
 </script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
-function idCehck(){
-	var memId=$('#memId').val();
+function idCheck(){
+	
 	$.ajax({
 		type : 'post',
-		url : './ajaxIdCheck?memId='+memId,
-		contentType:"application/json; charset=utf-8;",
+		url : './ajaxIdCheck',
+		data:{
+			memId:$('#memId').val()
+		},
 		success : function(data){
-			if(data==1)
+			if(data==1){
 			$('#id_check').text("사용중인 아이디입니다.");
 			$('#id_check').css("color","red");
-			$("")
+			
+			}else{
+				$('#id_check').text("사용 가능한 아이디입니다.");
+				$('#id_check').css("color","blue");
+				return true;
+			}
+		},
+		error : function(request, status, error) {
+			alert("실패");
 		}
 		
-	})
+	});
 }
 </script>
 <script>
@@ -380,8 +390,8 @@ function idCehck(){
 													<ul class="pta">
 														<li class="r10"><input type="text" name="memId"
 															id="memId" class="w134" /></li>
-														<li><a href="#" class="nbtnMini">중복확인</a></li>
-														<li class="pt5"><span class="mvalign">첫 글자는
+														<li><button type="button" class="nbtnMini" onclick="idCheck()">중복확인</button></li>
+														<li class="pt5"><span class="mvalign" id="id_check">첫 글자는
 																영문으로 4~16자 까지 가능, 영문, 숫자와 특수기호(_)만 사용 가능</span></li>
 													</ul>
 												</td>
@@ -403,7 +413,7 @@ function idCehck(){
 													<ul class="pta">
 														<li class="r10"><input type="password"
 															name="memPwCheck" class="w134" /></li>
-														<li><span class="mvalign black">* 비밀번호가 일치입니다.</span>
+														<li><span class="mvalign black" id="pwMatch">* 비밀번호가 일치입니다.</span>
 															<span class="mvalign orange">* 비밀번호가 일치하지 않습니다.</span></li>
 													</ul>
 												</td>

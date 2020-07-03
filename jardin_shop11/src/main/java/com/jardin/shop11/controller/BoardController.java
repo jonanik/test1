@@ -1,5 +1,6 @@
 package com.jardin.shop11.controller;
 
+import java.lang.ProcessBuilder.Redirect;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -11,10 +12,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jardin.shop11.dto.EventDto;
 import com.jardin.shop11.dto.JoinDto;
 import com.jardin.shop11.dto.LoginDto;
+import com.jardin.shop11.dto.ReplyDto;
 import com.jardin.shop11.service.BoardService;
 
 @Controller
@@ -22,19 +25,19 @@ public class BoardController {
 
 	@Autowired
 	BoardService boardService;
-
+//-----------------------------------------------------------------------------------------
 	@RequestMapping("main")
 	public String main() {
 		return "main/main";
 	}
-
+//-----------------------------------------------------------------------------------------
 	// 리스트 출력
 	@RequestMapping("list")
 	public String list(Model model) {
 		model.addAttribute("list", boardService.list());
 		return "list";
 	}
-
+//-----------------------------------------------------------------------------------------
 	// 회원가입 폼 이동
 	@RequestMapping("joinOk")
 	public String join(JoinDto joinDto) {
@@ -44,7 +47,7 @@ public class BoardController {
 	@RequestMapping("ajaxIdCheck")
 	@ResponseBody
 	public int idCheck(String memId) {
-		
+		System.out.println("컨트롤러 멤버 아이디: "+memId);
 		return boardService.idCheck(memId);
 	}
 
@@ -53,7 +56,8 @@ public class BoardController {
 	public String joinOk() {
 		return "join/join";
 	}
-
+	
+//-----------------------------------------------------------------------------------------
 	// 로그인 페이지로 이동
 	@RequestMapping("login")
 	public String login() {
@@ -67,12 +71,7 @@ public class BoardController {
 		model.addAttribute("memId", (String) session.getAttribute("memId"));
 		return "main/main";
 	}
-
-	// 이벤트글 상세페이지
-	@RequestMapping("eventView")
-	public String eventView() {
-		return "event/eventView";
-	}
+//-----------------------------------------------------------------------------------------
 
 	// 이벤트글 작성 페이지(관리자페이지 대신)
 	@RequestMapping("eventWriteForm")
@@ -92,6 +91,25 @@ public class BoardController {
 	public String eventList(Model model) {
 		model.addAttribute("eventList", boardService.eventList());
 		return "event/event";
+	}
+	// 이벤트글 상세페이지
+	@RequestMapping("eventView")
+	public String eventView(EventDto eventDto,Model model,HttpSession session) {
+		String memId=(String)session.getAttribute("memId");
+		eventDto =boardService.eventView(eventDto);
+		model.addAttribute("eventView",boardService.eventView(eventDto));
+		model.addAttribute("memId",memId);
+
+		return "event/eventView";
+	}
+//-----------------------------------------------------------------------------------------
+	//댓글 쓰기
+	@RequestMapping("eventReply")
+	public String eventReply(ReplyDto replyDto,RedirectAttributes redirect) {
+		
+		boardService.eventReplyWrite(replyDto);
+		redirect.addAttribute("eventNo",replyDto.getEventNo());
+		return "redirect:eventView";
 	}
 
 }

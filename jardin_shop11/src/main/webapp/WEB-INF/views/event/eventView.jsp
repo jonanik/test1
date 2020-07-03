@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,11 +28,68 @@
 <![endif]-->
 <script type="text/javascript">
 $(document).ready(function() {
-	
+	//댓글수정열기
+	$(".modib").click(function(){
+		var index=$(".modib").index(this);
+
+		$(".modib").parent().show();
+				$(".modiwzone").hide();
+		$(this).parent().hide();
+		$(".modiwzone").eq(index).show();
+	});
+	$(".reset_re").click(function(){
+		var index2=$(".reset_re").index(this);
+		$(".modiwzone").eq(index2).hide();
+		$(".modib").eq(index2).parent().show();
+	});
 
 
 });
+
+
+function loginCheck(){
+var loginCheck=eventReply.memId.value;
+if(loginCheck==""){
+	alert("로그인후 작성 가능합니다.");
+	return false;
+}else{
+
+	function ajax_Form_insert(){
+		
+// 		var bTitle1 = $('#bTitle').val();
+// 		var bContent1 = $('#bContent').val();
+// 		var bName1 = $('#bName').val();
+		
+		$.ajax({
+			type:'post',
+			url:'./ajax_insert', //맵핑 명을적어줌
+			data: {
+					bTitle:$("#bTitle").val(),
+					bContent:$("#bContent").val(),   //--->한개씩 받아올 경우
+					bName:$("#bName").val()
+			}, 
+// :$("#ajaxForm").serialize(), //Form에 있는거 모두 가져오고 심을경우  
+			 //jsp ->controller 보낼 데이터가 있으면 기입
+			
+
+			success:function(data) {//괄호안에 있는 'data'에 값이 담겨있다.
+				alert("입력 성공");
+				ajax_view();
+			},
+			error:function(request, status, error) {
+				alert("실패");
+			}
+
+		});
+	}
+	
+	eventReply.submit();
+}
+
+	
+}
 </script>
+
 </head>
 <body>
 
@@ -96,15 +155,15 @@ $(document).ready(function() {
 				<div id="mnaviOpen"><img src="images/btn/btn_mnavi.gif" width="33" height="31" alt="메뉴열기" /></div>
 				<div id="mnaviClose"><img src="images/btn/btn_mnavi_close.gif" width="44" height="43" alt="메뉴닫기" /></div>
 				<ul>
-					<li><a href="#">EVENT</a></li>
+					<li><a href="event">EVENT</a></li>
 					<li><a href="#">CUSTOMER</a></li>
 					<li><a href="#">COMMUNITY</a></li>
 				</ul>
 			</div>
 			<div id="snb">
 				<ul>
-					<li><a href="#">LOGIN</a></li>
-					<li><a href="#">JOIN</a></li>
+					<li><a href="login">LOGIN</a></li>
+					<li><a href="join">JOIN</a></li>
 					<li><a href="#">MY PAGE</a></li>
 					<li><a href="#">CART</a></li>
 				</ul>
@@ -215,16 +274,17 @@ $(document).ready(function() {
 						<div class="viewHead">
 							<div class="subject">
 								<ul>
-									<li>까페모리 봄바람 커피한잔 30% 할인 이벤트!!</li>
+									<li>${eventView.title }</li>
 								</ul>
 							</div>
 							<div class="day">
-								<p class="txt">이벤트 기간<span>2014-04-01 ~ 2014-04-29</span></p>
+								<p class="txt">이벤트 기간 <span><fmt:formatDate value="${eventView.startDate}" pattern="yyyy-MM-dd"/> ~ 
+								<fmt:formatDate value="${eventView.endDate}" pattern="yyyy-MM-dd"/></span></p>
 							</div>
 						</div>
 
 						<div class="viewContents">
-							<img src="images/img/sample_event_view.jpg" alt="" />
+							<img src="resources/eventImage/${eventView.eventImage}" alt="" />
 						</div>
 					</div>
 
@@ -255,39 +315,56 @@ $(document).ready(function() {
 					</div>
 					<!-- //이전다음글 -->
 
-
+<form action="eventReply" name="eventReply" method="post">
 					<!-- 댓글-->
 					<div class="replyWrite">
 						<ul>
 							<li class="in">
 								<p class="txt">총 <span class="orange">3</span> 개의 댓글이 달려있습니다.</p>
-								<p class="password">비밀번호&nbsp;&nbsp;<input type="password" class="replynum" /></p>
-								<textarea class="replyType"></textarea>
+								<p class="password">비밀번호&nbsp;&nbsp;<input type="password" name="replyPw" class="replynum" /></p>
+								<textarea class="replyType" name="content"></textarea>
+								<input type="hidden" name="eventNo" value="${eventView.eventNo}"/>
+								<input type="hidden" name="memId" value="${memId}"/>
 							</li>
-							<li class="btn"><a href="#" class="replyBtn">등록</a></li>
+							<li class="btn"><button type="button" onclick="loginCheck()" class="replyBtn">등록</button></li>
 						</ul>
 						<p class="ntic">※ 비밀번호를 입력하시면 댓글이 비밀글로 등록 됩니다.</p>
 					</div>
-
+</form>
 					<div class="replyBox">
-						<ul>
-							<li class="name">jjabcde <span>[2014-03-04&nbsp;&nbsp;15:01:59]</span></li>
-							<li class="txt"><textarea class="replyType"></textarea></li>
-							<li class="btn">
-								<a href="#" class="rebtn">수정</a>
-								<a href="#" class="rebtn">삭제</a>
-							</li>
-						</ul>
 
 						<ul>
 							<li class="name">jjabcde <span>[2014-03-04&nbsp;&nbsp;15:01:59]</span></li>
 							<li class="txt">대박!!! 이거 저한테 완전 필요한 이벤트였어요!!</li>
-							<li class="btn">
-								<a href="#" class="rebtn">수정</a>
-								<a href="#" class="rebtn">삭제</a>
+							<li class="btn" >
+								<a href="javascript:;" class="rebtn modib">수정</a>
+								<a href="javascript:;" class="rebtn">삭제</a>
 							</li>
 						</ul>
-
+						<ul class="modiwzone" style="display:none;">
+							<li class="name">jjabcde <span>[2014-03-04&nbsp;&nbsp;15:01:59]</span></li>
+							<li class="txt"><textarea class="replyType"></textarea></li>
+							<li class="btn">
+								<a href="javascript:;" class="rebtn">완료</a>
+								<a href="javascript:;" class="rebtn reset_re">취소</a>
+							</li>
+						</ul>
+						<ul>
+							<li class="name">jjabcde <span>[2014-03-04&nbsp;&nbsp;15:01:59]</span></li>
+							<li class="txt">대박!!! 이거 저한테 완전 필요한 이벤트였어요!!</li>
+							<li class="btn" >
+								<a href="javascript:;" class="rebtn modib">수정</a>
+								<a href="javascript:;" class="rebtn">삭제</a>
+							</li>
+						</ul>
+						<ul class="modiwzone" style="display:none;">
+							<li class="name">jjabcde <span>[2014-03-04&nbsp;&nbsp;15:01:59]</span></li>
+							<li class="txt"><textarea class="replyType"></textarea></li>
+							<li class="btn">
+								<a href="javascript:;" class="rebtn">완료</a>
+								<a href="javascript:;" class="rebtn reset_re">취소</a>
+							</li>
+						</ul>
 						<ul>
 							<li class="name">jjabcde <span>[2014-03-04&nbsp;&nbsp;15:01:59]</span></li>
 							<li class="txt">

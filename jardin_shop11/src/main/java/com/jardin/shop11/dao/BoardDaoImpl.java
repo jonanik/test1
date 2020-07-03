@@ -10,6 +10,7 @@ import com.jardin.shop11.dto.BoardDto;
 import com.jardin.shop11.dto.EventDto;
 import com.jardin.shop11.dto.JoinDto;
 import com.jardin.shop11.dto.LoginDto;
+import com.jardin.shop11.dto.ReplyDto;
 
 @Repository
 public class BoardDaoImpl implements BoardDao {
@@ -34,7 +35,7 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public int idCheck(String memId) {
 		
-		return sqlSession.selectOne("board.idCehck",memId);
+		return sqlSession.selectOne("board.idCheck",memId);
 	}
 
 	// 로그인 체크 - 아이디와 비밀번호가 멤버테이블에 있는지 비교 확인하여 세션 부여
@@ -52,6 +53,19 @@ public class BoardDaoImpl implements BoardDao {
 	// 이벤트 리스트 출력
 	public List<EventDto> eventList() {
 		return sqlSession.selectList("board.eventList");
+	}
+
+	//이벤트 상세페이지
+	@Override
+	public EventDto eventView(EventDto eventDto) {
+		
+		return sqlSession.selectOne("board.eventView",eventDto);
+	}
+
+	//이벤트 댓글 쓰기
+	@Override
+	public void eventReplyWrite(ReplyDto replyDto) {
+		sqlSession.insert("board.eventReplyWrite",replyDto);
 	}
 
 

@@ -22,8 +22,8 @@ insert into member (memNo,memName,memId,memPw,email,emailReceive,
 </insert>
 
 <!-- 회원가입 아이디 중복체크 -->
-<select id="idCheck" resultType="String">
-select count(*) memId from member where memId=#{memId}
+<select id="idCheck" resultType="int">
+select count(*) from member where memId=#{memId}
 
 </select>
 
@@ -39,7 +39,15 @@ select count(*) memId from member where memId=#{memId}
 
 <!-- 이벤트 리스트 가져오기 -->
  <select id="eventList" resultType="com.jardin.shop11.dto.EventDto">
-	select * from event
+	select * from event order by eventNo desc
  </select>
  
+<!-- 이벤트 상세페이지 --> 
+<select id="eventView" resultType="com.jardin.shop11.dto.EventDto">
+	select * from event where eventNo=#{eventNo}
+</select>
+
+<insert id="eventReplyWrite">
+	insert into reply values(reply_seq.nextval,#{eventNo},#{memId},#{replyPw},#{content},sysdate)
+</insert>
 </mapper>

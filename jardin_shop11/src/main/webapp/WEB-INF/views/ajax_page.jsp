@@ -15,6 +15,7 @@ table, tr, td {
 	border: 1px solid black;
 	width: 1100px;
 }
+textarea{width:1100px; row:"3"; cols:"30";}
 </style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -24,7 +25,38 @@ table, tr, td {
 		ajax_view(); //여기에 호출하면 자동으로 실행하게 된다.
 	})
 
-	//리스트 가져오기 ajax
+	
+	function ajax_Form_insert(){
+		
+// 		var bTitle1 = $('#bTitle').val();
+// 		var bContent1 = $('#bContent').val();
+// 		var bName1 = $('#bName').val();
+		
+		$.ajax({
+			type:'post',
+			url:'./ajax_insert', //맵핑 명을적어줌
+			data: {
+					bTitle:$("#bTitle").val(),
+					bContent:$("#bContent").val(),   //--->한개씩 받아올 경우
+					bName:$("#bName").val()
+			}, 
+// :$("#ajaxForm").serialize(), //Form에 있는거 모두 가져오고 심을경우  
+			 //jsp ->controller 보낼 데이터가 있으면 기입
+			
+
+			success:function(data) {//괄호안에 있는 'data'에 값이 담겨있다.
+				alert("입력 성공");
+				ajax_view();
+			},
+			error:function(request, status, error) {
+				alert("실패");
+			}
+
+		});
+	}
+	
+	
+// 	리스트 가져오기 ajax
 	function ajax_view() { //클릭해서 이 펑션을 실행해주게 한다.
 	
 		$.ajax({
@@ -57,12 +89,40 @@ table, tr, td {
 				alert("실패");
 			}
 
-		})
+		});
 
 	}
 </script>
 </head>
 <body>
+<form  id="ajaxForm" name="ajaxForm" method="post">
+<table>
+<tr>
+<td>제목</td>
+<td><input type="text" name="bTitle" id="bTitle"></td>
+</tr>
+<tr>
+<td>내용</td>
+<td><textarea name="bContent" id="bContent"></textarea></td>
+</tr>
+<tr>
+<td>이름</td>
+<td><input type="text" name="bName" id="bName"></td>
+</tr>
+<tr>
+<td></td>
+<td>
+<button onclick="ajax_Form_insert()">전송</button>
+<input type="reset" value="취소" ></td>
+</tr>
+</table>
+</form>
+
+
+
+
+
+
 	<h2>게시판</h2>
 	<p id="ajaxname"><!-- ajaxname호출되는 부분 --></p>
 	<table>

@@ -220,7 +220,7 @@ $(document).ready(function() {
 							<c:forEach var="eventList" items="${eventList}">
 							<li>
 								<div class="img">
-									<a href="eventView"><img src="resources/eventImage/${eventList.thumbnail}" alt="진행중 이벤트" /></a>
+									<a href="eventView?eventNo=${eventList.eventNo}"><img src="resources/eventImage/${eventList.thumbnail}" alt="진행중 이벤트" /></a>
 								</div>
 								<div class="txt">
 									<div class="subject">${eventList.title}</div>
