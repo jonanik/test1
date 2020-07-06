@@ -1,7 +1,9 @@
 package com.jardin.shop11.controller;
 
 import java.lang.ProcessBuilder.Redirect;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -44,6 +46,7 @@ public class BoardController {
 		boardService.join(joinDto);
 		return "join/joinOk";
 	}
+	//아이디 중복체크
 	@RequestMapping("ajaxIdCheck")
 	@ResponseBody
 	public int idCheck(String memId) {
@@ -69,6 +72,13 @@ public class BoardController {
 	public String loginOk(LoginDto loginDto, HttpSession session, Model model) {
 		boardService.loginOk(loginDto, session);
 		model.addAttribute("memId", (String) session.getAttribute("memId"));
+		return "main/main";
+	}
+	//로그아웃
+	@RequestMapping("logout")
+	public String logout(HttpSession session) {
+		System.out.println("로그아웃 한다.");
+		session.invalidate();
 		return "main/main";
 	}
 //-----------------------------------------------------------------------------------------
@@ -102,6 +112,15 @@ public class BoardController {
 
 		return "event/eventView";
 	}
+	//이벤트글 상세페이지 이전글 다음글
+	@RequestMapping("preNextPost")
+	@ResponseBody
+	public Map<String, Object> preNextPost(EventDto eventDto) {
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("prePost", boardService.prePost(eventDto));
+		map.put("nextPost", boardService.nextPost(eventDto));
+		return map;
+	}
 //-----------------------------------------------------------------------------------------
 	//댓글 쓰기(ajax)
 	@RequestMapping("eventReply")
@@ -112,16 +131,23 @@ public class BoardController {
 	//댓글 리스트 가져오기
 	@RequestMapping("replyList")
 	@ResponseBody
-	public List<ReplyDto> replyList(){
-		return boardService.replyList();
+	public List<ReplyDto> replyList(int eventNo){
+		return boardService.replyList(eventNo);
 	}
 	//댓글 삭제
-		@RequestMapping("replyDelete")
-		@ResponseBody
-		public void replyDelete(int replyNo){
-			System.out.println("컨트롤러 replyNo: "+replyNo);
-			 boardService.replyDelete(replyNo);
-		}
+	@RequestMapping("replyDelete")
+	public void replyDelete(int replyNo){
+	 boardService.replyDelete(replyNo);
+	}
+	
+	//댓글 수정
+	@RequestMapping("replyUpdate")
+	public void replyUpdate(ReplyDto replyDto) {
+	boardService.replyUpdate(replyDto);
+	}
+	
+		
+		
 	
 	
 	

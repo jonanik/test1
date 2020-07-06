@@ -103,15 +103,37 @@ public class BoardServiceImpl implements BoardService {
 	
 	//이벤트 댓글 리스트 가져오기(selectList)
 	@Override
-	public List<ReplyDto> replyList() {
+	public List<ReplyDto> replyList(int eventNo) {
 		
-		return boardDao.replyList();
+		return boardDao.replyList(eventNo);
 	}
-
+	
+	//이벤트 댓글 삭제
 	@Override
 	public void replyDelete(int replyNo) {
 		 boardDao.replyDelete(replyNo);
 	}
+	
+	//이벤트 댓글 수정
+	@Override
+	public void replyUpdate(ReplyDto replyDto) {
+		boardDao.replyUpdate(replyDto);
+		
+	}
+	
+	//이벤트 댓글 이전글
+	@Override
+	public EventDto prePost(EventDto eventDto) {
+		return boardDao.prePost(eventDto);
+	}
+
+	//이벤트 댓글 다음글
+	@Override
+	public EventDto nextPost(EventDto eventDto) {
+		return boardDao.nextPost(eventDto);
+	}
+
+	
 
 	
 

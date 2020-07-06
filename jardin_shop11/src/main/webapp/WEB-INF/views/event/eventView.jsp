@@ -28,53 +28,44 @@
 <![endif]-->
 <script type="text/javascript">
 	$(document).ready(function() {
-		//댓글수정열기
-		$(".modib").click(function() {
-			var index = $(".modib").index(this);
-
-			$(".modib").parent().show();
-			$(".modiwzone").hide();
-			$(this).parent().hide();
-			$(".modiwzone").eq(index).show();
-		});
-		$(".reset_re").click(function() {
-			var index2 = $(".reset_re").index(this);
-			$(".modiwzone").eq(index2).hide();
-			$(".modib").eq(index2).parent().show();
-		});
-
-		replyList();
+		
+		replyList('${eventView.eventNo}');
 		
 	});
 
 	//댓글 리스트 불러오기
-	function replyList(){
+	function replyList(eventNo){
 	$.ajax({
 		type:'post',
 		url:'./replyList',
+		data:{
+			eventNo:eventNo
+		},
 		success:function(data){
-// 			alert("리스트 불러오기 성공");
+			alert("리스트 불러오기 성공");
 			
 			var html="";
 			
 			for(var i=0;i<data.length;i++){
+		html+='<form>';
 		html+='<ul>';
 		html+='<li class="name">'+data[i].memId+ '<span>['+data[i].replyDate+']</span></li>';
 		html+='<li class="txt">'+data[i].content+'</li>';
-		html+='<li class="btn"><a href="javascript:;" class="rebtn modib">수정</a> <a href="javascript:;" onclick=deleteConfirm('+data[i].replyNo+') class="rebtn">삭제</a></li>';
+		html+='<li class="btn '+data[i].replyNo+'"><a href="javascript:;" class="modib rebtn" onclick="replymodi('+data[i].replyNo+')">수정</a> <a href="javascript:;" onclick=deleteConfirm('+data[i].replyNo+') class="rebtn">삭제</a></li>';
 		html+='</ul>';
-		html+='<ul class="modiwzone" style="display: none;">';
+		html+='<ul id="'+data[i].replyNo+'" class="modiwzone" style="display: none;">';
 		html+='<li class="name">'+data[i].memId+'<span>['+data[i].replyDate+']</span></li>';
-		html+='<li class="txt"><textarea class="replyType"></textarea></li>';
-		html+='<li class="btn"><a href="javascript:;" class="rebtn">완료</a>';
-		html+='<a href="javascript:;" class="rebtn reset_re">취소</a></li>';
+		html+='<li class="txt"><textarea name="content" class="replyType">'+data[i].content+'</textarea><input type="text" hidden="hidden" value="'+data[i].content+'" name="'+data[i].replyNo+'"></li>';
+		html+='<li class="btn"><a href="javascript:;" onclick="replyUpdate()" class="rebtn">완료</a>';
+		html+='<a href="javascript:;" class="rebtn reset_re" onclick=replyReset("'+data[i].replyNo+'")>취소</a></li>';
 		html+='</ul>';	
+		html+='</form>';
 		
 			}
 			$("#replyList").html(html);	
 		},
 		error:function(request,status,error){
-			alert("리시트 불러오기 실패");
+			alert("리스트 불러오기 실패");
 		}
 		
 	});
@@ -143,8 +134,84 @@
 
 		eventReply.submit();
 	}
-</script>
+	
+	
 
+	
+	//이전글 다음글
+	function preNextPost(){
+		$.ajax({
+			type:'post',
+			url:'./preNextPost',
+			data:{
+				eventNo:$('#eventNo').val(),
+			},
+			success:function(data){
+// 				alert("이전글 다음글 가져오기 성공");
+				
+// 				var html="";
+// 			html+='<tr>';
+// 			html+='<th class="pre">PREV</th>';
+// 			html+='<td><a href="preNextPost">상품 재입고는 언제 되나요?</a></td>';
+// 			html+='<td>&nbsp;</td>';
+// 			</tr>
+
+// 			<tr>
+// 				<th class="preNextPost">NEXT</th>
+// 				<td>다음 글이 없습니다.</td>
+// 				<td>&nbsp;</td>
+			}
+			
+		});
+		
+	}
+</script>
+<!-- 댓글 수정 제위치로 오게 만들기 -->
+<script type="text/javascript">
+
+function replymodi(a){
+	
+	$(".modiwzone").hide();
+	$(".modib").parent().show();
+	$("."+a).hide();
+	//수정취소일 경우 내용 초기화
+	var k=$("input[name="+a+"]").val();
+	$("#"+a).val(k);
+	$('#'+a).show();
+}
+function replyReset(b){
+	$(".modib").parent().show();
+	$('#'+b).hide();
+	$(".replyType").val="";
+}
+
+function replyUpdate(){
+	$.ajax({
+		type:'post',
+		url:'./preNextPost',
+		data:{
+			eventNo:$('#eventNo').val(),
+		},
+		success:function(data){
+//				alert("이전글 다음글 가져오기 성공");
+			
+//				var html="";
+//			html+='<tr>';
+//			html+='<th class="pre">PREV</th>';
+//			html+='<td><a href="preNextPost">상품 재입고는 언제 되나요?</a></td>';
+//			html+='<td>&nbsp;</td>';
+//			</tr>
+
+//			<tr>
+//				<th class="preNextPost">NEXT</th>
+//				<td>다음 글이 없습니다.</td>
+//				<td>&nbsp;</td>
+		}
+		
+	});
+}
+
+</script>
 </head>
 <body>
 
@@ -387,17 +454,17 @@
 										<col width="*" />
 										<col width="100px" />
 									</colgroup>
-									<tbody>
-										<tr>
-											<th class="pre">PREV</th>
-											<td><a href="#">상품 재입고는 언제 되나요?</a></td>
-											<td>&nbsp;</td>
-										</tr>
+									<tbody id="prePost">
+<!-- 										<tr> -->
+<!-- 											<th class="pre">PREV</th> -->
+<!-- 											<td><a href="preNextPost">상품 재입고는 언제 되나요?</a></td> -->
+<!-- 											<td>&nbsp;</td> -->
+<!-- 										</tr> -->
 
-										<tr>
-											<th class="next">NEXT</th>
-											<td>다음 글이 없습니다.</td>
-											<td>&nbsp;</td>
+<!-- 										<tr> -->
+<!-- 											<th class="preNextPost">NEXT</th> -->
+<!-- 											<td>다음 글이 없습니다.</td> -->
+<!-- 											<td>&nbsp;</td> -->
 										</tr>
 									</tbody>
 								</table>
@@ -441,6 +508,19 @@
 <!-- 									<li class="btn"><a href="javascript:;" class="rebtn">완료</a> -->
 <!-- 										<a href="javascript:;" class="rebtn reset_re">취소</a></li> -->
 <!-- 								</ul> -->
+<!-- 								<ul> -->
+<!-- 									<li class="name">jjabcde <span>[2014-03-04&nbsp;&nbsp;15:01:59]</span></li> -->
+<!-- 									<li class="txt">대박!!! 이거 저한테 완전 필요한 이벤트였어요!!</li> -->
+<!-- 									<li class="btn"><a href="javascript:;" -->
+<!-- 										class="rebtn modib">수정</a> <a href="javascript:;" -->
+<!-- 										class="rebtn">삭제</a></li> -->
+<!-- 								</ul> -->
+<!-- 								<ul class="modiwzone" style="display: none;"> -->
+<!-- 									<li class="name">jjabcde <span>[2014-03-04&nbsp;&nbsp;15:01:59]</span></li> -->
+<!-- 									<li class="txt"><textarea class="replyType"></textarea></li> -->
+<!-- 									<li class="btn"><a href="javascript:;" class="rebtn">완료</a> -->
+<!-- 										<a href="javascript:;" class="rebtn reset_re">취소</a></li> -->
+<!-- 								</ul> -->
 							</div>
 							<!-- //댓글 -->
 
@@ -449,7 +529,7 @@
 							<div class="btnArea">
 								<div class="bRight">
 									<ul>
-										<li><a href="#" class="sbtnMini mw">목록</a></li>
+										<li><a href="event" class="sbtnMini mw">목록</a></li>
 									</ul>
 								</div>
 							</div>

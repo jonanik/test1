@@ -30,6 +30,25 @@ $(document).ready(function() {
 
 
 });
+
+function loginOk(){
+	$.ajax({
+		type:'post',
+		url:'./loginOk', //맵핑 명을적어줌
+		data: {
+				memId:$("#memId").val(),
+				memPw:$("#memPw").val(),   //--->한개씩 받아올 경우
+		}, 
+		success:function(data) {//괄호안에 있는 'data'에 값이 담겨있다.
+			alert("로그인 성공");
+		},
+		error:function(request, status, error) {
+			alert("실패");
+		}
+
+	});
+	
+}
 </script>
 </head>
 <body>
@@ -219,11 +238,11 @@ $(document).ready(function() {
 					<div class="informbox">
 						<div class="inform">
 							<ul>
-								<li><input type="text" name="memId" class="loginType" onfocus="this.className='mfocus'" onblur="if (this.value.length==0) {this.className='loginType'}else {this.className='mfocusnot'}" style="ime-mode:inactive;" /></li>
-								<li><input type="password" name="memPw" class="passType" onfocus="this.className='mfocus'" onblur="if (this.value.length==0) {this.className='passType'}else {this.className='mfocusnot'}" style="ime-mode:inactive;" /></li>
+								<li><input type="text" name="memId" id="memId" class="loginType" onfocus="this.className='mfocus'" onblur="if (this.value.length==0) {this.className='loginType'}else {this.className='mfocusnot'}" style="ime-mode:inactive;" /></li>
+								<li><input type="password" name="memPw" id="memPw" class="passType" onfocus="this.className='mfocus'" onblur="if (this.value.length==0) {this.className='passType'}else {this.className='mfocusnot'}" style="ime-mode:inactive;" /></li>
 							</ul>
 
-							<div class="btn"><button class="sbtn">로그인</button></div>
+							<div class="btn"><button class="sbtn" onclick="loginOk()">로그인</button></div>
 							<div class="chk"><input type="checkbox" id="idsave"/><label for="idsave">아이디 저장</label></div>							
 
 							<div class="point">

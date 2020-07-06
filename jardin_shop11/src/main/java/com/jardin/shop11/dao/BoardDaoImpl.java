@@ -70,15 +70,35 @@ public class BoardDaoImpl implements BoardDao {
 	}
 	//이벤트 댓글 리스트 출력(selectList)
 	@Override
-	public List<ReplyDto> replyList() {
+	public List<ReplyDto> replyList(int eventNo) {
 		
-		return sqlSession.selectList("board.eventReplyList");
+		return sqlSession.selectList("board.eventReplyList",eventNo);
 	}
 	
 	//이벤트 댓글 삭제(delete)
 	public void replyDelete(int replyNo) {
 		sqlSession.delete("board.replyDelete",replyNo);
 	}
+	
+	//이벤트 댓글 수정(update)
+	public void replyUpdate(ReplyDto replyDto) {
+		sqlSession.update("board.replyUpdate",replyDto);
+		
+	}
+	
+	//이벤트 상세페이지 이전글
+	@Override
+	public EventDto prePost(EventDto eventDto) {
+		return sqlSession.selectOne("board.prePost",eventDto);
+	}
+	
+	//이벤트 상세페이지 다음글
+	@Override
+	public EventDto nextPost(EventDto eventDto) {
+		return sqlSession.selectOne("board.nextPost",eventDto);
+	}
+
+	
 
 
 

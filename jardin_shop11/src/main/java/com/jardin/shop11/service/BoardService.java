@@ -39,10 +39,19 @@ public interface BoardService {
 	public void eventReplyWrite(ReplyDto replyDto);
 	
 	//이벤트 댓글 리스트 가져오기(selectList)
-	public List<ReplyDto> replyList();
+	public List<ReplyDto> replyList(int eventNo);
 	
 	//이벤트 댓글 삭제
 	public void replyDelete(int replyNo);
-	}
+	
+	//이벤트 댓글 수정
+	public void replyUpdate(ReplyDto replyDto);
+	
+	//이벤트 상세페이지 이전글
+	public EventDto prePost(EventDto eventDto); 
+	
+	//이벤트 상세페이지 다음글
+	public EventDto nextPost(EventDto eventDto); 
 
 
+}
