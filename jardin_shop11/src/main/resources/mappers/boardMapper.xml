@@ -63,6 +63,10 @@ select count(*) from member where memId=#{memId}
 	delete reply where replyNo=#{replyNo}
 </delete>
 
+<update id="replyUpdate">
+	update reply set content=#{content} where replyNo=#{replyNo}
+</update>
+
 <!-- 이벤트 상세페이지 이전 글  -->
 <select id="prePost" resultType="com.jardin.shop11.dto.EventDto">
 	<![CDATA[select * from event where eventNo=(select max(eventNo) from (select * from event where eventNo < #{eventNo} )) ]]>

@@ -35,6 +35,7 @@
 
 	//댓글 리스트 불러오기
 	function replyList(eventNo){
+
 	$.ajax({
 		type:'post',
 		url:'./replyList',
@@ -42,12 +43,11 @@
 			eventNo:eventNo
 		},
 		success:function(data){
-			alert("리스트 불러오기 성공");
 			
 			var html="";
 			
 			for(var i=0;i<data.length;i++){
-		html+='<form>';
+		html+='<form name="replyForm" id="replyFrom">';
 		html+='<ul>';
 		html+='<li class="name">'+data[i].memId+ '<span>['+data[i].replyDate+']</span></li>';
 		html+='<li class="txt">'+data[i].content+'</li>';
@@ -55,8 +55,10 @@
 		html+='</ul>';
 		html+='<ul id="'+data[i].replyNo+'" class="modiwzone" style="display: none;">';
 		html+='<li class="name">'+data[i].memId+'<span>['+data[i].replyDate+']</span></li>';
-		html+='<li class="txt"><textarea name="content" class="replyType">'+data[i].content+'</textarea><input type="text" hidden="hidden" value="'+data[i].content+'" name="'+data[i].replyNo+'"></li>';
-		html+='<li class="btn"><a href="javascript:;" onclick="replyUpdate()" class="rebtn">완료</a>';
+		html+='<li class="txt"><textarea name="content" id="content'+data[i].replyNo+'" class="replyType">'+data[i].content+'</textarea><input type="text" hidden="hidden" value="'+data[i].content+'" name="'+data[i].replyNo+'"></li>';
+		html+='<input type="hidden" name="replyNo" value="'+data[i].replyNo+'">';
+		html+='<input type="hidden" name="eventNo" value="'+data[i].eventNo+'">';
+		html+='<li class="btn"><button href="javascript:;" onclick="replyUpdate(this.form)" class="rebtn">완료</button>';
 		html+='<a href="javascript:;" class="rebtn reset_re" onclick=replyReset("'+data[i].replyNo+'")>취소</a></li>';
 		html+='</ul>';	
 		html+='</form>';
@@ -70,33 +72,28 @@
 		
 	});
 	}
-	
+	//댓글 삭제
 	function deleteConfirm(replyNo){
 		if(confirm("정말 삭제하시겠습니까?")==true){
-			replyDelete(replyNo);
-		}else{
-			return;
-		}
-	}
-	
-	//댓글 삭제
-	function replyDelete(replyNo){
-
+			
 			$.ajax({
 				type:'post',
 				url:'./replyDelete',
 				data:{replyNo:replyNo},
-				success:function(data){
-					alert(replyNo);
-					replyList();
+				success:function(){
+					alert("삭제되었습니다.");
+					location.reload();
 				},
 				error:function(request,status,error){
 					alert("실패")
 				}
 			});
+		}else{
+			return;
 		}
+	}
 	
-	
+
 	//로그인 체크후 댓글 작성
 	function loginCheck() {
 		var loginCheck = eventReply.memId.value;
@@ -176,7 +173,7 @@ function replymodi(a){
 	$("."+a).hide();
 	//수정취소일 경우 내용 초기화
 	var k=$("input[name="+a+"]").val();
-	$("#"+a).val(k);
+	$("#content"+a).val(k);
 	$('#'+a).show();
 }
 function replyReset(b){
@@ -185,28 +182,33 @@ function replyReset(b){
 	$(".replyType").val="";
 }
 
-function replyUpdate(){
+//댓글 수정
+function replyUpdate(replyForm){
+	var content=replyForm.content.value;
+	var replyNo=replyForm.replyNo.value;
+	var eventNo=replyForm.eventNo.value;
+// 		var params=$("form[name=replyForm]").serialize();
 	$.ajax({
 		type:'post',
-		url:'./preNextPost',
+		url:'./replyUpdate',
 		data:{
-			eventNo:$('#eventNo').val(),
+			content:content,
+			replyNo:replyNo,
+			eventNo:eventNo
 		},
 		success:function(data){
-//				alert("이전글 다음글 가져오기 성공");
+			if(data==1){
+			alert("댓글 수정 성공");
+			location.reload();
+			}else{
+			alert("댓글 내용 수정 실패");	
+			}
 			
-//				var html="";
-//			html+='<tr>';
-//			html+='<th class="pre">PREV</th>';
-//			html+='<td><a href="preNextPost">상품 재입고는 언제 되나요?</a></td>';
-//			html+='<td>&nbsp;</td>';
-//			</tr>
-
-//			<tr>
-//				<th class="preNextPost">NEXT</th>
-//				<td>다음 글이 없습니다.</td>
-//				<td>&nbsp;</td>
+		},
+		error : function(request, status, error) {
+			alert("통신 오류");
 		}
+	
 		
 	});
 }
@@ -214,7 +216,6 @@ function replyUpdate(){
 </script>
 </head>
 <body>
-
 
 
 	<!--익스레이어팝업-->

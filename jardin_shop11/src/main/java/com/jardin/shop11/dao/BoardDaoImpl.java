@@ -82,6 +82,9 @@ public class BoardDaoImpl implements BoardDao {
 	
 	//이벤트 댓글 수정(update)
 	public void replyUpdate(ReplyDto replyDto) {
+		System.out.println("댓글 내용 수정: "+replyDto.getContent());
+		System.out.println("댓글 번호"+replyDto.getReplyNo());
+		System.out.println("이벤트 번호"+replyDto.getEventNo());
 		sqlSession.update("board.replyUpdate",replyDto);
 		
 	}

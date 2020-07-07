@@ -121,6 +121,7 @@ public class BoardController {
 		map.put("nextPost", boardService.nextPost(eventDto));
 		return map;
 	}
+	 
 //-----------------------------------------------------------------------------------------
 	//댓글 쓰기(ajax)
 	@RequestMapping("eventReply")
@@ -136,14 +137,25 @@ public class BoardController {
 	}
 	//댓글 삭제
 	@RequestMapping("replyDelete")
+	@ResponseBody
 	public void replyDelete(int replyNo){
 	 boardService.replyDelete(replyNo);
 	}
 	
 	//댓글 수정
 	@RequestMapping("replyUpdate")
-	public void replyUpdate(ReplyDto replyDto) {
-	boardService.replyUpdate(replyDto);
+	@ResponseBody
+	public int replyUpdate(ReplyDto replyDto) {
+		int check=1;
+		
+		try {
+			System.out.println("컨트롤러 댓글 번호"+replyDto.getReplyNo());
+			System.out.println("컨트롤러 이벤트 번호"+replyDto.getEventNo());
+			boardService.replyUpdate(replyDto);
+		} catch (Exception e) {
+			check=0;
+		}
+		return check;
 	}
 	
 		
