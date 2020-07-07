@@ -30,9 +30,24 @@
 	$(document).ready(function() {
 		
 		replyList('${eventView.eventNo}');
-		
+		replyCnt('${eventView.eventNo}');
 	});
-
+	//댓글 갯수
+function replyCnt(eventNo){
+	$.ajax({
+		type:'post',
+		url:'./replyCnt',
+		data:{
+			eventNo:eventNo
+		},
+		success:function(data){
+			$("#replyCnt").html(data);
+		},
+		error:function(request,status,error){
+			alert("댓글 개수 불러오기 실패");
+		}
+	});
+}
 	//댓글 리스트 불러오기
 	function replyList(eventNo){
 
@@ -212,6 +227,7 @@ function replyUpdate(replyForm){
 		
 	});
 }
+
 
 </script>
 </head>
@@ -478,7 +494,7 @@ function replyUpdate(replyForm){
 									<ul>
 										<li class="in">
 											<p class="txt">
-												총 <span class="orange">3</span> 개의 댓글이 달려있습니다.
+												총 <span class="orange" id="replyCnt"></span> 개의 댓글이 달려있습니다.
 											</p>
 											<p class="password">
 												비밀번호&nbsp;&nbsp;<input type="password" name="replyPw"

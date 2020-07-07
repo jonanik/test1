@@ -37,6 +37,9 @@ public interface BoardDao {
 	//이벤트 댓글 리스트 가져오기(selectList)
 	public List<ReplyDto> replyList(int eventNo);
 	
+	//이벤트 댓글 갯수 가져오기
+	public int replyCnt(int eventNo);
+	
 	//이벤트 댓글 삭제
 	public void replyDelete(int replyDelete);
 	

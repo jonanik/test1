@@ -135,6 +135,14 @@ public class BoardController {
 	public List<ReplyDto> replyList(int eventNo){
 		return boardService.replyList(eventNo);
 	}
+	
+	//댓글 개수
+	@RequestMapping("replyCnt")
+	@ResponseBody
+	public int replyCnt(int eventNo) {
+		return boardService.replyCnt(eventNo);
+	}
+	
 	//댓글 삭제
 	@RequestMapping("replyDelete")
 	@ResponseBody

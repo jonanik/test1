@@ -58,6 +58,11 @@ select count(*) from member where memId=#{memId}
 <select id="eventReplyList" resultType="com.jardin.shop11.dto.ReplyDto">
 	select * from reply where eventNo=#{eventNo} order by replyDate desc
 </select>
+
+<!-- 이벤트 댓글 개수 -->
+<select id="eventReplyCnt" resultType="int">
+	select count(*) from reply where eventNo=#{eventNo}
+</select>
 <!-- 이벤트 댓글 삭제 -->
 <delete id="replyDelete">
 	delete reply where replyNo=#{replyNo}

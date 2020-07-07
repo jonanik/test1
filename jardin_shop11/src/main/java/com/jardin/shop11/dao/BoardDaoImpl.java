@@ -71,8 +71,13 @@ public class BoardDaoImpl implements BoardDao {
 	//이벤트 댓글 리스트 출력(selectList)
 	@Override
 	public List<ReplyDto> replyList(int eventNo) {
-		
 		return sqlSession.selectList("board.eventReplyList",eventNo);
+	}
+
+	//이벤트 댓글 개수
+	@Override
+	public int replyCnt(int eventNo) {
+		return sqlSession.selectOne("board.eventReplyCnt",eventNo);
 	}
 	
 	//이벤트 댓글 삭제(delete)
@@ -100,9 +105,4 @@ public class BoardDaoImpl implements BoardDao {
 	public EventDto nextPost(EventDto eventDto) {
 		return sqlSession.selectOne("board.nextPost",eventDto);
 	}
-
-	
-
-
-
 }

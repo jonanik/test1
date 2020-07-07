@@ -104,9 +104,14 @@ public class BoardServiceImpl implements BoardService {
 	//이벤트 댓글 리스트 가져오기(selectList)
 	@Override
 	public List<ReplyDto> replyList(int eventNo) {
-		
 		return boardDao.replyList(eventNo);
 	}
+
+	//이벤트 댓글 개수
+		@Override
+		public int replyCnt(int eventNo) {
+			return boardDao.replyCnt(eventNo);
+		}
 	
 	//이벤트 댓글 삭제
 	@Override
@@ -132,9 +137,5 @@ public class BoardServiceImpl implements BoardService {
 	public EventDto nextPost(EventDto eventDto) {
 		return boardDao.nextPost(eventDto);
 	}
-
-	
-
-	
 
 }
