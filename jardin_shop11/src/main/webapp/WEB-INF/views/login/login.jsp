@@ -20,6 +20,7 @@
 <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
 <script type="text/javascript" src="js/idangerous.swiper-2.1.min.js"></script>
 <script type="text/javascript" src="js/jquery.anchor.js"></script>
+<script type="text/javascript" src="js/login/login.js"></script>
 <!--[if lt IE 9]>
 <script type="text/javascript" src="js/html5.js"></script>
 <script type="text/javascript" src="js/respond.min.js"></script>
@@ -31,24 +32,7 @@ $(document).ready(function() {
 
 });
 
-function loginOk(){
-	$.ajax({
-		type:'post',
-		url:'./loginOk', //맵핑 명을적어줌
-		data: {
-				memId:$("#memId").val(),
-				memPw:$("#memPw").val(),   //--->한개씩 받아올 경우
-		}, 
-		success:function(data) {//괄호안에 있는 'data'에 값이 담겨있다.
-			alert("로그인 성공");
-		},
-		error:function(request, status, error) {
-			alert("실패");
-		}
 
-	});
-	
-}
 </script>
 </head>
 <body>
@@ -234,7 +218,7 @@ function loginOk(){
 				<div id="member">
 					<h2><strong>로그인</strong><span>로그인 후 주문하시면 다양한 혜택을 받으실 수 있습니다.</span></h2>
 					<h3>회원 로그인</h3>
-					<form action="loginOk" method="post">
+					<form action="loginOk" name="loginForm" method="post">
 					<div class="informbox">
 						<div class="inform">
 							<ul>

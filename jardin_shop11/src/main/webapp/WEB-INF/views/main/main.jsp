@@ -182,7 +182,7 @@ $(document).ready(function() {
 					<li><a href="login">LOGIN</a></li>
 				</c:when>
 				<c:otherwise >
-				<li><a href="logout" onclick="logoutCheck()">${memId}</a></li>
+				<li><a href="logout" id="loginIdJone" onclick="logoutCheck()">${memId}</a></li>
 				</c:otherwise>
 				</c:choose>
 					<li><a href="join">JOIN</a></li>

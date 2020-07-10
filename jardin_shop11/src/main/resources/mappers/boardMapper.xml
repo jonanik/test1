@@ -29,7 +29,7 @@ select count(*) from member where memId=#{memId}
 <!-- 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인-->
 <!-- 로그인 -->
 <select id="loginOk" resultType="com.jardin.shop11.dto.LoginDto">
-		select count(*) loginCheck from member where memId=#{memId} and memPw=#{memPw}
+		select * from member where memId=#{memId} and memPw=#{memPw}
 	</select>
 <!-- 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인 로그인-->	
 

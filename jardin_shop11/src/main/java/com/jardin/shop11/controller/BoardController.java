@@ -30,7 +30,10 @@ public class BoardController {
 	BoardService boardService;
 //-----------------------------------------------------------------------------------------
 	@RequestMapping("main")
-	public String main() {
+	public String main(Model model,HttpSession session) {
+		String memId=(String)session.getAttribute("memId");
+		System.out.println("세션이 들어갔을까: "+memId);
+		model.addAttribute("memId",memId);
 		return "main/main";
 	}
 //-----------------------------------------------------------------------------------------
@@ -70,17 +73,16 @@ public class BoardController {
 
 	// 로그인 체크 - 아이디와 비밀번호가 멤버테이블에 있는지 비교 확인하여 세션 부여
 	@RequestMapping("loginOk")
-	public String loginOk(LoginDto loginDto, HttpSession session, Model model) {
-		boardService.loginOk(loginDto, session);
-		model.addAttribute("memId", (String) session.getAttribute("memId"));
-		return "main/main";
+	@ResponseBody
+	public LoginDto loginOk(LoginDto loginDto, HttpSession session, Model model) {
+		return boardService.loginOk(loginDto, session);
 	}
 	//로그아웃
 	@RequestMapping("logout")
 	public String logout(HttpSession session) {
 		System.out.println("로그아웃 한다.");
 		session.invalidate();
-		return "redirect";
+		return "main/main";
 	}
 //-----------------------------------------------------------------------------------------
 

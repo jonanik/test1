@@ -26,7 +26,7 @@ public interface BoardService {
 	public int idCheck(String memId);
 	
 	// 로그인 체크 - 아이디와 비밀번호가 멤버테이블에 있는지 비교 확인하여 세션 부여
-	public void loginOk(LoginDto loginDto, HttpSession session);
+	public LoginDto loginOk(LoginDto loginDto, HttpSession session);
 
 	// 이벤트 글작성(insert)
 	public void eventWrite(List<MultipartFile> multi, EventDto eventDto) throws Exception;

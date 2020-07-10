@@ -46,16 +46,12 @@ public class BoardServiceImpl implements BoardService {
 	
 	// 로그인 체크 - 아이디와 비밀번호가 멤버테이블에 있는지 비교 확인하여 세션 부여
 	@Override
-	public void loginOk(LoginDto loginDto, HttpSession session) {
-		int loginCheck = boardDao.loginOk(loginDto).getLoginCheck();
-		if (loginCheck == 1) {
-			System.out.println("로그인 성공");
-			session.setAttribute("memId", loginDto.getMemId());
-		} else if (loginCheck == 0) {
-			
+	public LoginDto loginOk(LoginDto loginDto, HttpSession session) {
+		if(loginDto.getMemId()!=null) {
+			session.setAttribute("memId",loginDto.getMemId());
 		}
-
-	}
+			return boardDao.loginOk(loginDto);
+		} 
 
 	// 이벤트
 	@Override
