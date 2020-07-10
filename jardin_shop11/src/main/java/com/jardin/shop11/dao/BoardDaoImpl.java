@@ -10,7 +10,9 @@ import com.jardin.shop11.dto.BoardDto;
 import com.jardin.shop11.dto.EventDto;
 import com.jardin.shop11.dto.JoinDto;
 import com.jardin.shop11.dto.LoginDto;
+import com.jardin.shop11.dto.PagenationDto;
 import com.jardin.shop11.dto.ReplyDto;
+import com.jardin.shop11.dto.SearchValue;
 
 @Repository
 public class BoardDaoImpl implements BoardDao {
@@ -52,8 +54,14 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	// 이벤트 리스트 출력
-	public List<EventDto> eventList() {
-		return sqlSession.selectList("board.eventList");
+	@Override
+	public List<EventDto> eventPageNationList(SearchValue sv) {
+		return sqlSession.selectList("board.eventList",sv);
+	}
+	//이벤트 리스트 글 개수
+	@Override
+	public PagenationDto eventPageNation(SearchValue sv) {
+		return sqlSession.selectOne("board.eventListNo",sv);
 	}
 
 	//이벤트 상세페이지
@@ -105,4 +113,5 @@ public class BoardDaoImpl implements BoardDao {
 	public EventDto nextPost(EventDto eventDto) {
 		return sqlSession.selectOne("board.nextPost",eventDto);
 	}
+
 }

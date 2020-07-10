@@ -42,8 +42,6 @@
 		 <!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
 		</dependency>
 
-	<!-- json 설정 -->
-
 <!-- json 설정 -->
    <dependency>
     <groupId>com.fasterxml.jackson.core</groupId>

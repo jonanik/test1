@@ -1,13 +1,12 @@
 package com.jardin.shop11.controller;
 
-import java.lang.ProcessBuilder.Redirect;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.omg.CORBA.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,8 +18,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.jardin.shop11.dto.EventDto;
 import com.jardin.shop11.dto.JoinDto;
 import com.jardin.shop11.dto.LoginDto;
+import com.jardin.shop11.dto.PagenationDto;
 import com.jardin.shop11.dto.ReplyDto;
 import com.jardin.shop11.service.BoardService;
+
 
 @Controller
 public class BoardController {
@@ -79,7 +80,7 @@ public class BoardController {
 	public String logout(HttpSession session) {
 		System.out.println("로그아웃 한다.");
 		session.invalidate();
-		return "main/main";
+		return "redirect";
 	}
 //-----------------------------------------------------------------------------------------
 
@@ -96,12 +97,24 @@ public class BoardController {
 		return "redirect:event";
 	}
 
-	// 이벤트 글 리스트 출력
+	// 이벤트 글 리스트 출력,검색,페이징
 	@RequestMapping("event")
-	public String eventList(Model model) {
-		model.addAttribute("eventList", boardService.eventList());
-		return "event/event";
-	}
+	public String eventList(com.jardin.shop11.dto.SearchValue sv,Model model) {
+		PagenationDto PDto = boardService.eventPageNation(sv); // 게시글 수 저장
+		List<EventDto> eventlist = boardService.eventPageNationList(sv);
+		String path="";
+		if(sv.getEventType().equals("event")) {
+			path="event/event";
+		}else if(sv.getEventType().equals("finEvent")) {
+			path="event/finEvent";
+		}
+		model.addAttribute("eventList", eventlist);
+		model.addAttribute("pDto", PDto);
+		model.addAttribute("sv", sv);
+		
+			return path;
+		}
+	
 	// 이벤트글 상세페이지
 	@RequestMapping("eventView")
 	public String eventView(EventDto eventDto,Model model,HttpSession session) {
@@ -122,6 +135,8 @@ public class BoardController {
 		return map;
 	}
 	 
+	//
+	
 //-----------------------------------------------------------------------------------------
 	//댓글 쓰기(ajax)
 	@RequestMapping("eventReply")
@@ -165,11 +180,5 @@ public class BoardController {
 		}
 		return check;
 	}
-	
-		
-		
-	
-	
-	
 
 }

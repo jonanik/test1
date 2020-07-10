@@ -22,218 +22,22 @@
 <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
 <script type="text/javascript" src="js/idangerous.swiper-2.1.min.js"></script>
 <script type="text/javascript" src="js/jquery.anchor.js"></script>
+<script type="text/javascript" src="js/eventAjax.js"></script>
+<script type="text/javascript" src="js/login/login.js"></script>
+
 <!--[if lt IE 9]>
 <script type="text/javascript" src="js/html5.js"></script>
 <script type="text/javascript" src="js/respond.min.js"></script>
 <![endif]-->
 <script type="text/javascript">
 	$(document).ready(function() {
-		
-		replyList('${eventView.eventNo}');
+		replyList('${eventView.eventNo}','${sessionScope.memId}');
 		replyCnt('${eventView.eventNo}');
 	});
-	//댓글 갯수
-function replyCnt(eventNo){
-	$.ajax({
-		type:'post',
-		url:'./replyCnt',
-		data:{
-			eventNo:eventNo
-		},
-		success:function(data){
-			$("#replyCnt").html(data);
-		},
-		error:function(request,status,error){
-			alert("댓글 개수 불러오기 실패");
-		}
-	});
-}
-	//댓글 리스트 불러오기
-	function replyList(eventNo){
-
-	$.ajax({
-		type:'post',
-		url:'./replyList',
-		data:{
-			eventNo:eventNo
-		},
-		success:function(data){
-			
-			var html="";
-			
-			for(var i=0;i<data.length;i++){
-		html+='<form name="replyForm" id="replyFrom">';
-		html+='<ul>';
-		html+='<li class="name">'+data[i].memId+ '<span>['+data[i].replyDate+']</span></li>';
-		html+='<li class="txt">'+data[i].content+'</li>';
-		html+='<li class="btn '+data[i].replyNo+'"><a href="javascript:;" class="modib rebtn" onclick="replymodi('+data[i].replyNo+')">수정</a> <a href="javascript:;" onclick=deleteConfirm('+data[i].replyNo+') class="rebtn">삭제</a></li>';
-		html+='</ul>';
-		html+='<ul id="'+data[i].replyNo+'" class="modiwzone" style="display: none;">';
-		html+='<li class="name">'+data[i].memId+'<span>['+data[i].replyDate+']</span></li>';
-		html+='<li class="txt"><textarea name="content" id="content'+data[i].replyNo+'" class="replyType">'+data[i].content+'</textarea><input type="text" hidden="hidden" value="'+data[i].content+'" name="'+data[i].replyNo+'"></li>';
-		html+='<input type="hidden" name="replyNo" value="'+data[i].replyNo+'">';
-		html+='<input type="hidden" name="eventNo" value="'+data[i].eventNo+'">';
-		html+='<li class="btn"><button href="javascript:;" onclick="replyUpdate(this.form)" class="rebtn">완료</button>';
-		html+='<a href="javascript:;" class="rebtn reset_re" onclick=replyReset("'+data[i].replyNo+'")>취소</a></li>';
-		html+='</ul>';	
-		html+='</form>';
-		
-			}
-			$("#replyList").html(html);	
-		},
-		error:function(request,status,error){
-			alert("리스트 불러오기 실패");
-		}
-		
-	});
-	}
-	//댓글 삭제
-	function deleteConfirm(replyNo){
-		if(confirm("정말 삭제하시겠습니까?")==true){
-			
-			$.ajax({
-				type:'post',
-				url:'./replyDelete',
-				data:{replyNo:replyNo},
-				success:function(){
-					alert("삭제되었습니다.");
-					location.reload();
-				},
-				error:function(request,status,error){
-					alert("실패")
-				}
-			});
-		}else{
-			return;
-		}
-	}
-	
-
-	//로그인 체크후 댓글 작성
-	function loginCheck() {
-		var loginCheck = eventReply.memId.value;
-		if (loginCheck == "") {
-			alert("로그인후 작성 가능합니다.");
-			return false;
-		} else {
-			//    	  		var bTitle1 = $('#bTitle').val();
-			//    	  		var bContent1 = $('#bContent').val();
-			//    	  		var bName1 = $('#bName').val();
-
-			$.ajax({
-				type : 'post',
-				url : './eventReply', //맵핑 명을적어줌
-				data : {
-					eventNo : $("#eventNo").val(),
-					memId : $("#memId").val(), //--->한개씩 받아올 경우
-					replyPw : $("#replyPw").val(),
-					content : $("#content").val()
-				},
-				// :$("#ajaxForm").serialize(), //Form에 있는거 모두 가져오고 심을경우  
-				//jsp ->controller 보낼 데이터가 있으면 기입
-
-				success : function(data) {//괄호안에 있는 'data'에 값이 담겨있다.
-					alert("댓글이 달렸습니다.");
-					replyList();
-
-				},
-				error : function(request, status, error) {
-					alert("실패");
-				}
-
-			});
-		}
-
-		eventReply.submit();
-	}
-	
-	
-
-	
-	//이전글 다음글
-	function preNextPost(){
-		$.ajax({
-			type:'post',
-			url:'./preNextPost',
-			data:{
-				eventNo:$('#eventNo').val(),
-			},
-			success:function(data){
-// 				alert("이전글 다음글 가져오기 성공");
-				
-// 				var html="";
-// 			html+='<tr>';
-// 			html+='<th class="pre">PREV</th>';
-// 			html+='<td><a href="preNextPost">상품 재입고는 언제 되나요?</a></td>';
-// 			html+='<td>&nbsp;</td>';
-// 			</tr>
-
-// 			<tr>
-// 				<th class="preNextPost">NEXT</th>
-// 				<td>다음 글이 없습니다.</td>
-// 				<td>&nbsp;</td>
-			}
-			
-		});
-		
-	}
-</script>
-<!-- 댓글 수정 제위치로 오게 만들기 -->
-<script type="text/javascript">
-
-function replymodi(a){
-	
-	$(".modiwzone").hide();
-	$(".modib").parent().show();
-	$("."+a).hide();
-	//수정취소일 경우 내용 초기화
-	var k=$("input[name="+a+"]").val();
-	$("#content"+a).val(k);
-	$('#'+a).show();
-}
-function replyReset(b){
-	$(".modib").parent().show();
-	$('#'+b).hide();
-	$(".replyType").val="";
-}
-
-//댓글 수정
-function replyUpdate(replyForm){
-	var content=replyForm.content.value;
-	var replyNo=replyForm.replyNo.value;
-	var eventNo=replyForm.eventNo.value;
-// 		var params=$("form[name=replyForm]").serialize();
-	$.ajax({
-		type:'post',
-		url:'./replyUpdate',
-		data:{
-			content:content,
-			replyNo:replyNo,
-			eventNo:eventNo
-		},
-		success:function(data){
-			if(data==1){
-			alert("댓글 수정 성공");
-			location.reload();
-			}else{
-			alert("댓글 내용 수정 실패");	
-			}
-			
-		},
-		error : function(request, status, error) {
-			alert("통신 오류");
-		}
-	
-		
-	});
-}
-
 
 </script>
 </head>
 <body>
-
-
 	<!--익스레이어팝업-->
 	<div id="ieUser" style="display: none">
 		<div class="iewrap">
@@ -325,7 +129,14 @@ function replyUpdate(replyForm){
 					</div>
 					<div id="snb">
 						<ul>
-							<li><a href="login">LOGIN</a></li>
+							<c:choose>
+				<c:when test="${memId==null}">
+					<li><a href="login">LOGIN</a></li>
+				</c:when>
+				<c:otherwise >
+				<li><a href="logout" name="loginId" id="loginId" onclick="logoutCheck()">${memId}</a></li>
+				</c:otherwise>
+				</c:choose>
 							<li><a href="join">JOIN</a></li>
 							<li><a href="#">MY PAGE</a></li>
 							<li><a href="#">CART</a></li>
@@ -421,8 +232,8 @@ function replyUpdate(replyForm){
 							EVENT<span>이벤트</span>
 						</div>
 						<ul>
-							<li><a href="#" id="leftNavi1">진행중 이벤트</a></li>
-							<li><a href="#" id="leftNavi2">종료된 이벤트</a></li>
+							<li><a href="event?eventType=event" id="leftNavi1">진행중 이벤트</a></li>
+							<li><a href="event?eventType=finEvent" id="leftNavi2">종료된 이벤트</a></li>
 							<li class="last"><a href="#" id="leftNavi3">당첨자 발표</span></a></li>
 						</ul>
 					</div>
@@ -457,6 +268,9 @@ function replyUpdate(replyForm){
 
 								<div class="viewContents">
 									<img src="resources/eventImage/${eventView.eventImage}" alt="" />
+								</div>
+								<div class="viewContents">
+									<p>${eventView.content }</p>
 								</div>
 							</div>
 
@@ -510,34 +324,10 @@ function replyUpdate(replyForm){
 									<p class="ntic">※ 비밀번호를 입력하시면 댓글이 비밀글로 등록 됩니다.</p>
 								</div>
 							</form>
+							
+<!-- 							댓글 박스 ajax html로 대체함 -->
 							<div class="replyBox" id="replyList">
-
-<!-- 								<ul> -->
-<!-- 									<li class="name">jjabcde <span>[2014-03-04&nbsp;&nbsp;15:01:59]</span></li> -->
-<!-- 									<li class="txt">대박!!! 이거 저한테 완전 필요한 이벤트였어요!!</li> -->
-<!-- 									<li class="btn"><a href="javascript:;" -->
-<!-- 										class="rebtn modib">수정</a> <a href="javascript:;" -->
-<!-- 										class="rebtn">삭제</a></li> -->
-<!-- 								</ul> -->
-<!-- 								<ul class="modiwzone" style="display: none;"> -->
-<!-- 									<li class="name">jjabcde <span>[2014-03-04&nbsp;&nbsp;15:01:59]</span></li> -->
-<!-- 									<li class="txt"><textarea class="replyType"></textarea></li> -->
-<!-- 									<li class="btn"><a href="javascript:;" class="rebtn">완료</a> -->
-<!-- 										<a href="javascript:;" class="rebtn reset_re">취소</a></li> -->
-<!-- 								</ul> -->
-<!-- 								<ul> -->
-<!-- 									<li class="name">jjabcde <span>[2014-03-04&nbsp;&nbsp;15:01:59]</span></li> -->
-<!-- 									<li class="txt">대박!!! 이거 저한테 완전 필요한 이벤트였어요!!</li> -->
-<!-- 									<li class="btn"><a href="javascript:;" -->
-<!-- 										class="rebtn modib">수정</a> <a href="javascript:;" -->
-<!-- 										class="rebtn">삭제</a></li> -->
-<!-- 								</ul> -->
-<!-- 								<ul class="modiwzone" style="display: none;"> -->
-<!-- 									<li class="name">jjabcde <span>[2014-03-04&nbsp;&nbsp;15:01:59]</span></li> -->
-<!-- 									<li class="txt"><textarea class="replyType"></textarea></li> -->
-<!-- 									<li class="btn"><a href="javascript:;" class="rebtn">완료</a> -->
-<!-- 										<a href="javascript:;" class="rebtn reset_re">취소</a></li> -->
-<!-- 								</ul> -->
+<!-- 							원래 여기에 소스가 있는데 ajax로 옮겼음 -->
 							</div>
 							<!-- //댓글 -->
 

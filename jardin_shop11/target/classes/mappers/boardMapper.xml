@@ -41,8 +41,63 @@ select count(*) from member where memId=#{memId}
 
 <!-- 이벤트 리스트 가져오기 -->
  <select id="eventList" resultType="com.jardin.shop11.dto.EventDto">
-	select * from event order by eventNo desc
- </select>
+	select * from(
+	select row_number() over(order by startdate asc, enddate asc) as rnum,
+   EventNo,title,content,thumbnail,eventimage,startdate,enddate
+   from (select * from event
+   
+     <choose>
+   <when test="eventType.equals('event')">
+   <![CDATA[where endDate-sysdate>0]]>
+   </when>
+   <when test="eventType.equals('finEvent')">
+   <![CDATA[where endDate-sysdate<0]]>
+   </when>
+   </choose>
+   
+      <choose>
+      <when test="option.equals('all')">
+      and title like '%'|| #{search}||'%' or content like '%'|| #{search}||'%'
+      </when>
+      <when test="option.equals('title')">
+      and title like '%'|| #{search}||'%'
+      </when>
+      <when test="option.equals('content')">
+      and content like '%'|| #{search}||'%'
+      </when>
+      </choose>
+      ))
+   where rnum between #{curPage}*10-9 and #{curPage}*10 order by eventNo desc
+   </select>
+   
+<!--   이벤트 리스트 글 개수 -->
+  <select id="eventListNo" resultType="com.jardin.shop11.dto.PagenationDto" >
+  	select count(*) listCnt from event 
+  	
+  	  <choose>
+   <when test="eventType.equals('event')">
+   <![CDATA[where endDate-sysdate>0]]>
+   </when>
+   <when test="eventType.equals('finEvent')">
+   <![CDATA[where endDate-sysdate<0]]>
+   </when>
+   </choose>
+  	
+  	<if test="option!=null">
+  	
+  	<choose>
+  	<when test="option.equals('all')">
+  	and title like '%'|| #{search}||'%' or content like '%'|| #{search}||'%'
+  	</when>
+  	<when test="option.equals('title')">
+  	and title like '%'|| #{search}||'%'
+  	</when>
+  	<when test="option.equals('content')">
+  	and content like '%'|| #{search}||'%'
+  	</when>
+  	</choose>
+  	</if>
+  </select>
  
 <!-- 이벤트 상세페이지 --> 
 <select id="eventView" resultType="com.jardin.shop11.dto.EventDto">

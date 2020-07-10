@@ -44,13 +44,14 @@ function joinCheck(){
 		joinForm.memPwCheck.focus();
 		return false;
 	}
-	
-	if(!(joinForm.memPw.value==pwReCheck)){
-		$("#pwCheck").text("비밀번호가 일치하지 않습니다.");
-		$("#pwCheck").css("color","red");
+	function pwCheck(){
+	if(!(joinForm.memPw.value.equals(pwReCheck))){
+//		$("#pwMatch").text("비밀번호가 일치하지 않습니다.");
+//		$("#pwMatch").css("color","red");
 //		alert("비밀번호가 일치하지 않습니다. 다시한번 확인해주세요.");
 		joinForm.memPwCheck.focus();
 		return false;
+	}
 	}
 	if(joinForm.email1.value==""){
 		alert("이메일을 입력해주세요.");

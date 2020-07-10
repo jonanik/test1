@@ -20,6 +20,7 @@
 <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
 <script type="text/javascript" src="js/idangerous.swiper-2.1.min.js"></script>
 <script type="text/javascript" src="js/jquery.anchor.js"></script>
+<script type="text/javascript" src="js/login/login.js"></script>
 <!--[if lt IE 9]>
 <script type="text/javascript" src="js/html5.js"></script>
 <script type="text/javascript" src="js/respond.min.js"></script>
@@ -94,15 +95,15 @@ $(document).ready(function() {
 
 });
 
-function logoutCheck(){
-	var logout=confirm("로그아웃 하시겠습니까?");
-	if (logout){
-		alert("로그아웃 합니다.");
-		location.href="logout";
-	}else{
-		return false;
-	}
-}
+// function logoutCheck(){
+// 	var logout=confirm("로그아웃 하시겠습니까?");
+// 	if (logout){
+// 		alert("로그아웃 합니다.");
+// 		location.href="logout";
+// 	}else{
+// 		return false;
+// 	}
+// }
 </script>
 </head>
 <body>
@@ -184,7 +185,7 @@ function logoutCheck(){
 				<li><a href="logout" onclick="logoutCheck()">${memId}</a></li>
 				</c:otherwise>
 				</c:choose>
-					<li><a href="#">JOIN</a></li>
+					<li><a href="join">JOIN</a></li>
 					<li><a href="#">MY PAGE</a></li>
 					<li><a href="#">CART</a></li>
 				</ul>

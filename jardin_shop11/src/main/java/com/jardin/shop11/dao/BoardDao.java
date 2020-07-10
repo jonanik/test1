@@ -6,7 +6,9 @@ import com.jardin.shop11.dto.BoardDto;
 import com.jardin.shop11.dto.EventDto;
 import com.jardin.shop11.dto.JoinDto;
 import com.jardin.shop11.dto.LoginDto;
+import com.jardin.shop11.dto.PagenationDto;
 import com.jardin.shop11.dto.ReplyDto;
+import com.jardin.shop11.dto.SearchValue;
 
 public interface BoardDao {
 
@@ -25,8 +27,11 @@ public interface BoardDao {
 	// 이벤트 글 작성(insert)
 	public void eventWrite(EventDto eventDto);
 
-	// 이벤트 리스트 출력
-	public List<EventDto> eventList();
+	// 이벤트 리스트 가져오기
+	public List<EventDto> eventPageNationList(SearchValue sv);
+		
+	//이벤트 리스트 글 개수
+	public PagenationDto eventPageNation(SearchValue sv);
 	
 	//이벤트 상세페이지 출력
 	public EventDto eventView(EventDto eventDto);
